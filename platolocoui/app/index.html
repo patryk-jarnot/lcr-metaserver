@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" ng-app="PlatoLoCoApp">
+  <head>
+    <meta charset="utf-8">
+    <title>PlaToLoCo</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="lib/feature-viewer/dist/feature-viewer.min.css" />
+
+    <script src="lib/canvg/lib/umd.js"></script>
+    <script src="lib/xml-js/dist/xml-js.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="lib/chart.js/dist/Chart.min.js"></script>
+    <script src="lib/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="lib/feature-viewer/dist/feature-viewer.bundle.js" charset="utf-8"></script>
+
+    <script src="utils/enrichment-frequency.js"></script>
+    <script src="utils/enrichment-phobius.js"></script>
+    <script src="utils/wrapper-sequence.js"></script>
+    <script src="utils/wrapper-entropy.js"></script>
+    <script src="utils/protein-list.js"></script>
+    <script src="utils/pfam-domains.js"></script>
+    <script src="utils/string-utils.js"></script>
+    <script src="utils/region-marker.js"></script>
+
+    <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
+
+    <script src="lib/angular-resource/angular-resource.js"></script>
+
+    <script src="core/core.module.js"></script>
+    <script src="core/protein/protein.module.js"></script>
+    <script src="core/protein/protein.service.js"></script>
+    <script src="core/proteins/proteins.module.js"></script>
+    <script src="core/proteins/proteins.service.js"></script>
+    <script src="core/job/job.module.js"></script>
+    <script src="core/job/job.service.js"></script>
+    <script src="core/query/query.module.js"></script>
+    <script src="core/query/query.service.js"></script>
+
+    <script src="help-page/help-page.module.js"></script>
+    <script src="help-page/help-page.component.js"></script>
+    <script src="api-page/api-page.module.js"></script>
+    <script src="api-page/api-page.component.js"></script>
+    <script src="wait-page/wait-page.module.js"></script>
+    <script src="wait-page/wait-page.component.js"></script>
+    <script src="about-page/about-page.module.js"></script>
+    <script src="about-page/about-page.component.js"></script>
+    <script src="tutorial-page/tutorial-page.module.js"></script>
+    <script src="tutorial-page/tutorial-page.component.js"></script>
+    <script src="job-finder/job-finder.module.js"></script>
+    <script src="job-finder/job-finder.component.js"></script>
+
+    <script src="protein-list/protein-list.module.js"></script>
+    <script src="protein-list/protein-list.component.js"></script>
+    <script src="protein-detail/protein-detail.module.js"></script>
+    <script src="protein-detail/protein-detail.component.js"></script>
+    <script src="query-creator/query-creator.module.js"></script>
+    <script src="query-creator/query-creator.component.js"></script>
+
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+      <script>
+            $('[data-toggle="popover"]').popover();
+      </script>
+      <div style="width:100%; height:68px; background-color:#014C8F;font-size:40px;color:white;padding-left:80px;">
+        <a id="logo" href="#!/query">
+        <div style="display: inline-block;">
+            <img style="margin-top:6px; display: block; margin-left: auto; margin-right: auto;" src="img/platoloco_logo.png" />
+        </div>
+        </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div style="display: inline-block;">
+          <div style="position:relative; top:-6px; ">
+            <a href="#!/query" class="menu_item">Query</a>&nbsp;
+            <a href="#!/job" class="menu_item">Job</a>&nbsp;
+            <a href="#!/api" class="menu_item">API</a>&nbsp;
+            <a href="#!/help" class="menu_item">Doc</a>&nbsp;
+            <a href="#!/tutorial" class="menu_item">Tutorial</a>&nbsp;
+            <a href="#!/about" class="menu_item">About</a>&nbsp;
+            <a href="mailto:patryk.jarnot@polsl.pl" class="menu_item">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0px;" ng-view></div>
+  </body>
+</html>

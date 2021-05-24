@@ -1,0 +1,5 @@
+<div style="text-align:center;margin-top:200px;">
+    Enter your job id or name: <input type="text" size=80 ng-keypress="submitJobIdIfEnter($event)" ng-model="token" />
+     <input type="button" ng-click="submitJobId()" value='Find' /><br><br>
+    <font color="red">{{message}}</font>
+</div>

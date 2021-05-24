@@ -1,0 +1,1 @@
+find ../platolocorestapi/data/cafs/* -maxdepth 1 -mindepth 1 -type d -mtime +7 -exec rm -fr '{}' \;

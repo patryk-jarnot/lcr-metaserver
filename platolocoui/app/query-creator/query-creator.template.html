@@ -1,0 +1,84 @@
+<div style="padding:40px;margin-left:50px">
+    <div class="detailBar"><div class="detailBarPoint"></div><div class="detailBarText">Sequence</div></div>
+    Job title (Not required - you can just find your job using the title later):<br>
+    <input type="text" size=158 ng-model="jobTitle" /><br><br>
+    Enter UniProt AC(s) or fasta sequence(s):<br/>
+    <textarea name="input_field" ng-model="input_text" rows=12 cols=160 ></textarea><br/>
+    <input class="thumbnailbutton" type="button" ng-click="exampleUniprotIds()" value="Example UniProt ACs"/>&nbsp;&nbsp;&nbsp;
+    <input class="thumbnailbutton" type="button" ng-click="exampleSequences()" value="Example fasta sequences"/><br/><br/>
+    Or upload file (limit - 1MB):<br/>
+    <input type="file" ng-click="uploadFile()" id="fileInput"/><br/><br/>
+    <div class="detailBar"><div class="detailBarPoint"></div><div class="detailBarText">Methods</div>
+        <div class="detailBarHelp">
+            <a href="#!/help#method_description" target="_blank" type="button" class="header-help" title="" style="font-size: 1.5em;"><span class="label-doc label label-as-badge">doc</span></a>
+        </div>
+    </div>
+    <input class="thumbnailbutton" type="button" ng-click="expandCollapseAllParams(true)" value="Expand all"/>
+    <input class="thumbnailbutton" type="button" ng-click="expandCollapseAllParams(false)" value="Collapse all"/><br><br>
+    <div class="method_element"><span id="expand_seg" ng-click="expandCollapseParams('seg')" class="expand_char">&#9654;</span>&nbsp;&nbsp;&nbsp;&nbsp;<input class="method_item" type="checkbox" ng-model="methods.seg_default"/><span class="checkboxtext">SEG</span></div><br>
+    <div class="method_params" id="seg_params">
+        <div class="method_option">Window (W): <input class="option_input_number" type="number" ng-model="params.seg.window"></div><br>
+        <div class="method_option">Locut (K1): <input class="option_input_number" type="number" ng-model="params.seg.k1"></div><br>
+        <div class="method_option">Hicut (K2): <input class="option_input_number" type="number" ng-model="params.seg.k2"></div>
+    </div>
+    <div class="method_element"><span id="expand_seg_intermediate" class="expand_char"></span>&nbsp;&nbsp;&nbsp;&nbsp;<input class="method_item" type="checkbox" ng-model="methods.seg_intermediate"/><span class="checkboxtext">SEG-intermediate (K1: 1.9, K2: 2.5, W: 15)</span></div><br>
+    <div class="method_element"><span id="expand_seg_strict" class="expand_char"></span>&nbsp;&nbsp;&nbsp;&nbsp;<input class="method_item" type="checkbox" ng-model="methods.seg_strict"/><span class="checkboxtext">SEG-strict (K1: 1.5, K2: 1.8, window: 15)</span></div><br>
+    <div class="method_element"><span id="expand_cast" ng-click="expandCollapseParams('cast')" class="expand_char">&#9654;</span>&nbsp;&nbsp;&nbsp;&nbsp;<input class="method_item" type="checkbox" ng-model="methods.cast"/><span class="checkboxtext">CAST</span></div><br>
+    <div class="method_params" id="cast_params">
+        <div class="method_option">Threshold: <input class="option_input_number" type="number" ng-model="params.cast.threshold"></div><br>
+    </div>
+    <div class="method_element"><span id="expand_flps" ng-click="expandCollapseParams('flps')" class="expand_char">&#9654;</span>&nbsp;&nbsp;&nbsp;&nbsp;<input class="method_item" type="checkbox" ng-model="methods.flps"/><span class="checkboxtext">fLPS</span></div><br>
+    <div class="method_params" id="flps_params">
+        <div class="method_option">Minimum tract length (m): <input class="option_input_number" type="number" ng-model="params.flps.min_tract_len"></div><br>
+        <div class="method_option">Maximum tract length (M): <input class="option_input_number" type="number" ng-model="params.flps.max_tract_len"></div><br>
+        <div class="method_option">Binomial p-value (t): <input class="option_input_number" type="number" ng-model="params.flps.pval"></div><br>
+        Regions:
+        <div class="method_params" style="display:block;">
+            <div class="method_option"><input ng-model="params.flps.regions.single" type="checkbox"/><span class="checkboxtext">Single</span></div><br>
+            <div class="method_option"><input ng-model="params.flps.regions.multiple" type="checkbox"/><span class="checkboxtext">Multiple</span></div><br>
+            <div class="method_option"><input ng-model="params.flps.regions.whole" type="checkbox"/><span class="checkboxtext">Whole</span></div>
+        </div>
+    </div>
+    <div class="method_element"><span id="expand_flps_strict" class="expand_char"></span>&nbsp;&nbsp;&nbsp;&nbsp;<input class="method_item" type="checkbox" ng-model="methods.flps_strict"/><span class="checkboxtext">fLPS-strict (m: 5, M: 25, t: 0.00001)</span></div><br>
+    <div class="method_element"><span id="expand_simple" ng-click="expandCollapseParams('simple')" class="expand_char">&#9654;</span>&nbsp;&nbsp;&nbsp;&nbsp;<input class="method_item" type="checkbox" ng-model="methods.simple"/><span class="checkboxtext">SIMPLE</span></div><br>
+    <div class="method_params" id="simple_params">
+        <div class="method_option">Score mono: <input class="option_input_number" type="number" ng-model="params.simple.score_mono"></div><br>
+        <div class="method_option">Score di: <input class="option_input_number" type="number" ng-model="params.simple.score_di"></div><br>
+        <div class="method_option">Score tri: <input class="option_input_number" type="number" ng-model="params.simple.score_tri"></div><br>
+        <div class="method_option">Score tetra: <input class="option_input_number" type="number" ng-model="params.simple.score_tetra"></div><br>
+        <div class="method_option">Score penta: <input class="option_input_number" type="number" ng-model="params.simple.score_penta"></div><br>
+        <div class="method_option">Score hexa: <input class="option_input_number" type="number" ng-model="params.simple.score_hexa"></div><br>
+        <div class="method_option">Score hepta: <input class="option_input_number" type="number" ng-model="params.simple.score_hepta"></div><br>
+        <div class="method_option">Score octa: <input class="option_input_number" type="number" ng-model="params.simple.score_octa"></div><br>
+        <div class="method_option">Score nona: <input class="option_input_number" type="number" ng-model="params.simple.score_nona"></div><br>
+        <div class="method_option">Score deca: <input class="option_input_number" type="number" ng-model="params.simple.score_deca"></div><br>
+        <div class="method_option">Window: <input class="option_input_number" type="number" ng-model="params.simple.window"></div><br>
+        <div class="method_option">Number of rand. sequences: <input class="option_input_number" type="number" ng-model="params.simple.num_of_rand"></div><br>
+        <div class="method_option">Random method:
+            <select class="option_input_number" ng-model="params.simple.rand_method">
+                <option ng-value="1">1</option>
+                <option ng-value="2">2</option>
+                <option ng-value="3">3</option>
+                <option ng-value="4">4</option>
+            </select>
+        </div>
+        <br>
+        <div class="method_option">Stringency: <input class="option_input_number" type="number" ng-model="params.simple.stringency"></div><br>
+    </div>
+    <div class="method_element"><span id="expand_gbsc" ng-click="expandCollapseParams('gbsc')" class="expand_char">&#9654;</span>&nbsp;&nbsp;&nbsp;&nbsp;<input class="method_item" type="checkbox" ng-model="methods.gbsc"/><span class="checkboxtext">GBSC</span></div><br>
+    <div class="method_params" id="gbsc_params">
+        <div class="method_option">Score: <input class="option_input_number" type="number" ng-model="params.gbsc.score"></div><br>
+        <div class="method_option">Distance: <input class="option_input_number" type="number" ng-model="params.gbsc.distance"></div>
+    </div>
+
+    <br><br>
+    <div class="detailBar"><div class="detailBarPoint"></div><div class="detailBarText">Enrichment</div>
+        <div class="detailBarHelp">
+            <a href="#!/help#enrichment_description" target="_blank" type="button" class="header-help" title="" style="font-size: 1.5em;"><span class="label-doc label label-as-badge">doc</span></a>
+        </div>
+    </div>
+    <input type="checkbox" ng-model="enrichment.pfam"/><span class="checkboxtext">Pfam</span><br>
+    <input type="checkbox" ng-model="enrichment.phobius"/><span class="checkboxtext">Phobius</span><br>
+    <input type="checkbox" ng-model="enrichment.aafrequency"/><span class="checkboxtext">Amino acid frequencies</span><br><br/>
+    <input class="thumbnailbutton" type="button" ng-click="submit()" value="Submit"/>
+</div>

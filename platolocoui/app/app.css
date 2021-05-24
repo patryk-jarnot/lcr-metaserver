@@ -1,0 +1,156 @@
+body {
+    padding: 0px;
+}
+
+.menu_item {
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.menu_item:link, .menu_item:visited {
+    font-size: 26px;
+    color: white;
+}
+
+.detailBgFirst {
+/ / background-color: #fbf3da;
+}
+
+.detailBgSecond {
+/ / background-color: #fbeec9;
+}
+
+.detailElement {
+    padding: 0px 80px;
+}
+
+.detailBar {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.detailBarPoint {
+    height: 8px;
+    width: 60px;
+    margin-top: 16px;
+    background-color: #FBBA00;
+    float: left;
+}
+
+.detailPointAPI {
+    margin-left: 5%;
+}
+
+
+
+.detailBarText {
+// overflow: hidden;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+    text-align: center;
+    font-size: 36px;
+}
+
+.detailBarHelp {
+// overflow: hidden;
+    font-size: 16px;
+}
+
+
+.APIBarText {
+// overflow: hidden;
+    margin-left: 20px;
+    height: 20px;
+    line-height: 16px;
+    float: left;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#logo {
+    color: white;
+    text-decoration: none;
+}
+
+.protlistitem:hover {
+    background-color: #B7DCFF;
+}
+
+.protlistitem a, .protlistitem a:hover, .protlistitem a:visited, .protlistitem a:link {
+    color: black;
+    text-decoration: none;
+}
+
+.thumbnailbutton {
+    background-color: #FFFFFF;
+}
+.thumbnailbutton:hover {
+    background-color: #B7DCFF;
+}
+
+.label-doc {
+    background-color: #00C563;
+}
+
+.method_params {
+    margin-left: 40px;
+    margin-top: 8px;
+    display: none;
+}
+
+.method_option {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    height: 28px;
+}
+
+.option_input_number {
+    position:absolute;
+    left:360px;
+}
+
+.option_select {
+    position:absolute;
+    left:360px;
+}
+
+.expand_char {
+    display:inline-block;
+    position:absolute;
+    cursor: pointer;
+    //background-color: red;
+}
+
+.method_element {
+    margin: 0px;
+    padding: 0px;
+    display:inline-block;
+}
+
+.method_item {
+    margin-left:30px;
+}
+
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  padding: 10px;
+}
+
+.checkboxtext
+{
+  /* Checkbox text */
+  font-size: 110%;
+  display: inline;
+  margin-left: 10px;
+}

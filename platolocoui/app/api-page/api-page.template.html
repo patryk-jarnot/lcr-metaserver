@@ -1,0 +1,335 @@
+<style type="text/css">
+    .tg {
+        border-color: #ddd;
+    }
+
+    .tg td {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        padding: 10px 5px;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        word-break: normal;
+        border-color: #ddd;
+        color: #444;
+        background-color: #EBF5FF;
+    }
+
+    .tg th {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        padding: 10px 5px;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        word-break: normal;
+        border-color: #ddd;
+        color: #fff;
+        background-color: #409cff;
+    }
+
+    .tg .firstcol {
+        background-color: #517CC5;
+        color: #ffffff;
+        border-color: inherit;
+        text-align: left;
+        vertical-align: middle
+    }
+
+    .tg .secoundcol {
+        background-color: #A7CCFF;
+        color: #444444;
+        border-color: inherit;
+        text-align: left;
+        vertical-align: middle
+    }
+</style>
+<div class="detailBgFirst detailElement">
+    <br>
+    <div class="detailBar">
+        <div class="detailBarPoint"></div>
+        <div class="detailBarText">RestFul API</div>
+    </div>
+    <div style="size:13px"> RESTful API allows to programme queries to run methods implemented on the PlaToLoCo server to
+        detect LCRs and analise them. Depending on the query, GET or PUT method should be used as described in the following chapters.<br>
+        Results calculated by "run" request are stored on the server. Server will store those results up to one week.
+    </div>
+
+<!--    <div id="fv1"></div>-->
+    <br><br>
+    <div>
+
+        <ul class="methods">
+            <div class="APIBarText">Run request</div>
+            <br>
+            <div class="detailPointAPI">
+                <br>
+
+                <table class="tg">
+                    <colgroup>
+                        <col style="width: 200px">
+                        <col style="width: 700px">
+                    </colgroup>
+                    <tr>
+                        <th class="firstcol">Description:</th>
+                        <th class="secoundcol">It requires sending data containing sequence, methods and parameters. In
+                            response, the server returns token, which can be used to collect result from server.
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="firstcol">Method:</th>
+                        <th class="secoundcol">PUT</th>
+                    </tr>
+
+                    <tr>
+                        <td class="firstcol">URL:</td>
+                        <td class="secoundcol">http://platoloco.aei.polsl.pl/restapi/query</td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">Example data:</td>
+                        <td class="secoundcol">
+                            {"sequences":"","methods":{"seg_default":false, "seg_intermediary":false, "seg_strict":true, "cast":true, "flps":true, "simple":true, "gbsc":true},"enrichment":{"aafrequency":true}}<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">Example response:</td>
+                        <td class="secoundcol">{token: "de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae"}</td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">Example of usage in Python:</td>
+                        <td class="secoundcol">import requests<br>
+                            respons = requests.post('http://platoloco.aei.polsl.pl/restapi/query', data=
+                            {"sequences":"","methods":{"seg_default":false,"seg_intermediary":false,"seg_strict":true,"cast":true,"flps":true,"simple":true, "gbsc":true},"enrichment":{"aafrequency":true})<br>
+                            json_response = response.json()
+                        </td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+        </ul>
+        <ul class="methods">
+            <div class="APIBarText">Get status request</div>
+            <br><br>
+            <div>
+            </div>
+            <div class="detailPointAPI">
+                <br>
+                <table class="tg">
+                    <colgroup>
+                        <col style="width: 200px">
+                        <col style="width: 700px">
+                    </colgroup>
+                    <tr>
+                        <th class="firstcol">Description:</th>
+                        <th class="secoundcol">You can check status of your query using this request.
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="firstcol">Method:</th>
+                        <th class="secoundcol">GET</th>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">URL:</td>
+                        <td class="secoundcol">http://platoloco.aei.polsl.pl/restapi/jobs/{token}</td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">Example URL:</td>
+                        <td class="secoundcol">
+                            http://platoloco.aei.polsl.pl/restapi/jobs/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">Example response:</td>
+                        <td class="secoundcol">
+                            {'status': 'FINISHED'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">Possible-states:</td>
+                        <td class="secoundcol">FINISHED, PROCESSING and ERROR.</td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">Example of usage in Python:</td>
+                        <td class="secoundcol"> import requests<br>
+                            respons =
+                            requests.get('http://platoloco.aei.polsl.pl/restapi/jobs/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae')<br>
+                            json_response = response.json()<br></td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+        </ul>
+        <br>
+        <ul class="methods">
+            <div class="APIBarText">Get summary request</div>
+
+            <br>
+            <div class="detailPointAPI">
+                <br>
+                <table class="tg">
+                    <colgroup>
+                        <col style="width: 200px">
+                        <col style="width: 700px">
+                    </colgroup>
+                    <tr>
+                        <th class="firstcol">Description:</th>
+                        <th class="secoundcol">When job is finished, it is available to
+                            download summary of results. Summary
+                            contains list of proteins with regions where Low Complexity Regions were detected.
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="firstcol">Method:</th>
+                        <th class="secoundcol">GET</th>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">URL:</td>
+                        <td class="secoundcol">http://platoloco.aei.polsl.pl/restapi/proteins/{token}</td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol"> Example URL:</td>
+                        <td class="secoundcol">
+                            http://platoloco.aei.polsl.pl/restapi/proteins/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">Possible-error:</td>
+                        <td class="secoundcol">Calculation not finished yet.</td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">Example of usage in Python:</td>
+                        <td class="secoundcol"> import requests<br>
+                            respons =
+                            requests.get('http://platoloco.aei.polsl.pl/restapi/proteins/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae')<br>
+                            json_response = response.json()<br></td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+        </ul>
+        <br>
+        <ul class="methods">
+            <div class="APIBarText">Detailed results request</div>
+            <br>
+            <div class="detailPointAPI">
+                <br>
+                <table class="tg">
+                    <colgroup>
+                        <col style="width: 200px">
+                        <col style="width: 700px">
+                    </colgroup>
+                    <tr>
+                        <th class="firstcol">Description</th>
+                        <th class="secoundcol">For each completed job it is possible to get detailed results about each
+                            protein. Response will contain all results for each methods selected in the query.
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="firstcol">Method</th>
+                        <th class="secoundcol">GET</th>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">URL</td>
+                        <td class="secoundcol">http://platoloco.aei.polsl.pl/restapi/proteins/{token}/{id}</td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">URL</td>
+                        <td class="secoundcol">
+                            http://platoloco.aei.polsl.pl/restapi/proteins/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae/1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">Possible-error:</td>
+                        <td class="secoundcol">Calculation not finished yet.</td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol">Example of usage in Python:</td>
+                        <td class="secoundcol"> import requests<br>
+                            respons =
+                            requests.get('http://platoloco.aei.polsl.pl/restapi/proteins/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae/1')<br>
+                            json_response = response.json()<br></td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+        </ul>
+    </div>
+    <h2>Python example</h2>
+    <pre>
+from optparse import OptionParser
+import requests
+import json
+import time
+
+
+def send_query(url):
+    url = "http://{0}/restapi/query".format(url)
+    data = '{"name":"","sequences":">sp|Q6GZX3|002L_FRG3G Uncharacterized protein 002L OS=Frog virus 3 (isolate Goorha) GN=FV3-002L PE=4 SV=1\\nSIIGATRLQNDKSDTYSAGPCYAGGCSAFTPRGTCGKDWDLGEQTCASGFCTSQPLCARKKTQVCGLRYSSKGKDPLVSAEWDSRGAPYVRCTYDADLIDTQAQVDQFVSMFGESPSLERYCMRGVKNTAGELVSRVSSDADPAGGWCRKWYSAHRGPDQDAALGSFCIKNPGAADCCINRASDPVYQKVKTLHAYPDQCWYVPCAADVGELKMGTQRDTPTNCPTQVCQIVFNMLDGSVTMDDVKNTINCDFSKYVPPPPPPKPTPPTPPTPPTPPTPPTPPTPPTPRPVHNRKMFFVAGAVLVAILISTVRW\\n>sp|P14922|CYC8_YEAST General transcriptional corepressor CYC8 OS=Saccharomyces cerevisiae (strain ATCC 204508 / S288c) GN=CYC8 PE=1 SV=2\\nNPGGEQTIMEQPAQQQQQQQQQQQQQQQQAAVPQQPLDPLTQSTAETWLSIASLAETLGGDRAAMAYDATLQFNPSSAKALTSLAHLYRSRDMFQRAAELYERALLVNPELSDVWATLHCYLMLDDLQRAYNAYQQALYHLSNPNVPKLWHGIGILYDRYGSLDYAEEAFAKVLELDHFEKANEIYFRLGIIYKHQGKWSQALECFRYILPQPPAPLQEWDIWFQLGSVLESMGEWGAKEAYEHVLAQNQHHAKVLQQLGCLYGMSNVQFYDPQKALDYLLKSLEADPSDATTWYLGRVHMIRTDYTAAYDAFQQAVNRDSRNPIFWCSIGVLYYQISQYRDALDAYTRAIRLNYISEVWYDLGTLYETCNNQLSDALDAYKQAARLDVNNVHIRERLEALTKQLENPGNINKNGAPTNASPAPPPVILQPTLQPNDQGNPLNTRISAQSANATASMVQQQHPAQQTPINSSTMYSNGASPQLQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAHAQAQAQAQAQAQAQAQAQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQLQPLPRQQLQQKGSVQMLNPQQGQPYITQPTVIQAHQLQPFSTQAMEHPQSSQLPPQQQQLQSVQHPQQLQGPQAQAPQPLIQHNVEQNVLPQKRYMEGAIHTLVDAAVSSSTHTENNTKSPRQPTHAIPTAPATGITNAEPQVKKQKLNSPNSNINKLVNTATSIEENAKSEVSNQSPAVVESNTNNTSEEKPVKANSIPSVIGAQEPPQEASPAEEATKAASVSPSTKPLNTEPESSSVQPTVSSESTTKANDQSTAETIELSTATVPAEASPVEDEVRQHSKEENGTTEASAPSTEEAEPAASRDEKQQDETAATTITVIKPTLETMETVKEEAKMREEEQTSQEKSPQENTLPRENVVRQVEEENYDD\\n>sp|Q1ZXH2|FHKB_DICDI Probable serine/threonine-protein kinase fhkB OS=Dictyostelium discoideum GN=fhkB PE=3 SV=1\\nSQDIQTQNSYSDELYSSQIYSTQQPQQPQQQPQQQQSTFSSQQSQSSSYDFIYSTPQIHQNSQNSQFSQNPLYDDFIHSTQNSYSQRVSSQRSYSQKSSSSQISFSQIPSSQIQSSQISSQIHSSQIPSSQNQSSQKSQFSFSQIPSSQIPSSQKRFFQSQNDDFVPSSQVTSLQDILPQPIQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQCQPQQQQTQQQQQQQQQQQQQQQQQQQQQQQQQTQQQQQQPQEDDDDYDDYDGYDNYEDFVYNEGEEGEEDYEDYEQENDDDDEDEDDDDDDDDDDDDEEEEEESQQQHIRSRALQSRSSQSRPLLRSGFKSPISRLSQTTSPEYIYISSQSNTHTNQLGQSSQQTNSPNVHFNSLQQKKKQQQQQQQQQQQQQQQQQQQQQQQQQQSQQIIGSQSSQSSQLPPTQPPVEVPVNLGRLIPINASHIPINLNLKREDRIVGRSSSCDARLIDNYLTISGKHCEIYRADNLTCLKHIPLCKDKTDCHKNFGMLIVHDISNGSYINGELIGNGKTRILRSDDILSLGHPSGDLKFIFESEFQFNFILDIKDNVNNLNENDYKKLRTAYDNARIENKNCALRDYYFVKEIGSGGYGIVYEGLYKLNGKRVAIKHIDLLKGSTSKSMELVSKEYNALKNIKHRNVIEFFDIVFSSTDCFFIVELATNDLSNLLRKRCVDDDIKRICKQLLLGFNYLHNLGIVHRDLKPENILYNEFKQGFSIKITDFGLSSFVEESQYQTFCGTPLFFAPEVIANNFFSNGYGKSCDLWSIGVTLYLSLCKYKPFIVDCRDLYHSFIGNLGFTSKKWAKISNYAKDLVRRLLVIDPEHRITIKEALNHPWFTQDRRFFKKYPKHYKRAQPKTQFFVECFNVYYDLKSETGFICFREHFDNLETNYALFKQNFDNNNNNNNNNNNNNNNNNNNNNNNNINNNNNNINNNNINNNNNNNNNNNNNTNTNNINNNNNNYNNSHNHNNNHNHNHNLNNHNHNNNHHHNHNHNHNHNHNHNHNHNHNHNHNHNHNNHNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNYYNNNINNINNNINNNINNNNNYHQQYTQHTM","methods":{"seg_default":true,"seg_intermediate":true,"seg_strict":true,"cast":true,"flps":true,"flps_strict":true,"simple":true,"gbsc":true},"enrichment":{"pfam":true,"phobius":true,"aafrequency":true},"params":{"seg":{"window":12,"k1":2.2,"k2":2.5},"cast":{"threshold":40,"matrix":1},"flps":{"min_tract_len":15,"max_tract_len":500,"pval":0.001,"regions":{"single":true,"multiple":true,"whole":false}},"simple":{"score_mono":1,"score_di":1,"score_tri":1,"score_tetra":1,"score_penta":1,"score_hexa":1,"score_hepta":1,"score_octa":1,"score_nona":1,"score_deca":1,"window":11,"num_of_rand":100,"rand_method":3,"stringency":0.9},"gbsc":{"score":3,"distance":7}}}'
+
+    response = requests.put(url, data=data)
+
+    return json.loads(response.text)['token']
+
+
+def ask_job_state(url, token):
+    url = "http://{0}/restapi/job/{1}".format(url, token)
+
+    response = requests.get(url)
+    return json.loads(response.text)['status']
+
+
+
+def get_list_of_proteins(url, token):
+    url = "http://{0}/restapi/proteins/{1}".format(url, token)
+
+    response = requests.get(url)
+    return json.loads(response.text)
+
+
+def get_protein_details(url, token, id):
+    url = "http://{0}/restapi/proteins/{1}/{2}".format(url, token, id)
+
+    response = requests.get(url)
+    return json.loads(response.text)
+
+
+def get_options():
+    parser = OptionParser()
+    parser.add_option("-v", "--version", action="store_true", dest="version", default=False)
+    parser.add_option("-u", "--url", dest="url", default='platoloco.aei.polsl.pl',
+                      help="Url to server", metavar="URL")
+    return parser.parse_args()
+
+
+def main(options, args):
+    token = send_query(options.url)
+    print(token)
+    print('')
+
+    while True:
+        status = ask_job_state(options.url, token)
+        print(status)
+        print('')
+        if status == "FINISHED":
+            break
+        time.sleep(1)
+
+    response_data = get_list_of_proteins(options.url, token)
+    print(response_data)
+    print('')
+
+    protein_details = get_protein_details(options.url, token, response_data['proteins'][0]['id'])
+    print(protein_details)
+
+
+if __name__ == "__main__":
+    options, args = get_options()
+    if options.version:
+        print("1.0.0")
+    else:
+        main(options, args)
+    </pre>
+    <br>
+</div>

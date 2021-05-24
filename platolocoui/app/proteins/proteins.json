@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "uniprot_id": "Q6GZX3",
+        "header": ">sp|Q6GZX3|002L_FRG3G Uncharacterized protein 002L OS=Frog virus 3 (isolate Goorha) GN=FV3-002L PE=4 SV=1",
+        "user_order": 1,
+        "regions": [[10, 20],[40, 50]],
+        "length": 100
+    },
+    {
+        "id": 2,
+        "uniprot_id": "Q197F8",
+        "header": ">sp|Q197F8|002R_IIV3 Uncharacterized protein 002R OS=Invertebrate iridescent virus 3 GN=IIV3-002R PE=4 SV=1",
+        "user_order": 2,
+        "regions": [[10, 20],[40, 50]],
+        "length": 100
+    },
+    {
+        "id": 3,
+        "uniprot_id": "P0C9H4",
+        "header": ">sp|P0C9H4|1105L_ASFWA Protein MGF 110-5L OS=African swine fever virus (isolate Warthog/Namibia/Wart80/1980) GN=War-011 PE=3 SV=1",
+        "user_order": 3,
+        "regions": [[10, 20],[40, 50],[90,110],[120,150]],
+        "length": 180
+    }
+]

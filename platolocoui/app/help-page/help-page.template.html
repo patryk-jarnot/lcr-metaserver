@@ -1,0 +1,664 @@
+<div style="margin:50px 100px; width:1000px;">
+    <style>
+        p {
+        text-align: justify;
+        text-justify: inter-word;
+        }
+    </style>
+    <div class="detailBar">
+        <div class="detailBarPoint"></div>
+        <div class="detailBarText">PLAtform of TOols for LOw COmplexity</div>
+    </div>
+
+<p>Low Complexity Regions (LCRs) differ in composition and sequence periodicity from most protein segments and the globular structures related to them. Starting in the 1990s, multiple algorithms were developed to detect LCRs from protein sequences, usually by exploiting their specific skewed amino acid compositions. From a structural point of view, this definition is still elusive as they cannot be accommodated into  the classic structure-function paradigm. </p>
+
+<p>
+LCRs can appear in both intrinsically disordered regions (IDRs) and ordered protein segments (such as coiled-coils). They represent a significant portion of proteins that lack 3D structural information, the so-called Dark Proteome [PMID:26578815]. Recent studies [PMID:31504783] show that LCRs have a significant and highly conserved presence and role in many organisms. They are directly involved in the development of various diseases, including neurodegenerative diseases and cancer. In most cases, LCR functions are still mysterious, recent evidence suggests that they often play a critical role in driving the formation of membraneless organelles through phase separation [PMID:29517898]. 
+</p>
+
+<p>
+The PlaToLoCo web server was designed to foster the detection of LCRs in protein sequences. The server aims to collect and visualize all information about LCRs, including different detection algorithms, descriptive statistics, and structure prediction methods often associated with LCR detection. 
+
+A detailed tutorial how to use PlaToLoCo can be found here: <a href="http://platoloco.aei.polsl.pl/#!/tutorial" target="_blank">PlaToLoCo tutorial</a>
+</p>
+<p>
+PlaToLoCo provides the following information about submitted protein sequences:
+</p>
+
+<h3><a name="method_description"></a>Detection of low complexity regions:</h3>
+
+
+<p><b>SEG:</b> SEG was the first algorithm to detect LCRs within protein sequences. It calculates the number of amino acid occurrences for a given <i>L</i> window, defined as a complexity state vector. For each vector the compositional complexity and the probability of occurrence can be computed, and used to classify segments as low or high complexity regions based on a threshold value for sequence entropy.  <br />
+Here we provide users with there different parameter settings for SEG: (relaxed (default), intermediate, and strict. The relaxed(default) setting (used in the original publication) is the most relaxed parameter setting so the results will include the largest number of sequences. SEG  intermediate is optimized for detecting longer and more repetitive low complexity regions in eukaryotes, while SEG strict ensures that the regions identified correspond to strongly compositionally biased sequences while also allowing for substantial sequence diversity.
+
+<ul>
+<li>SEG default: <i>W</i> = 12, <i>K1</i> = 2.2, <i>K2</i> = 2.5</li>
+<li>SEG intermediate: <i>W</i> = 15, <i>K1</i> = 1.9, <i>K2</i> = 2.5, as proposed in <i>Huntley, Golding 2002</i></li>
+<li>SEG strict: <i>W</i> = 15, <i>K1</i> = 1.5, <i>K2</i> = 1.8, as proposed in <i>Rado-Trilla, Alba 2012</i></li> 
+</ul>
+	<br>
+	parameters:
+	<ul>
+		<li>Window (W) - length of the window used to scan the sequence.</li>
+		<li>locut (K1) - low cutoff used to find low complexity region in the first stage of the algorithm (equation 4 from Wootton, J.C. and Federhen, S. (1993)).</li>
+		<li>hicut (K2) - high cutoff used to extend the low complexity region in the second stage of the algorithm found by the first stage (equation 3 from Wootton, J.C. and Federhen, S. (1993)).</li>
+	</ul>
+<br />
+<a href="https://www.sciencedirect.com/science/article/pii/009784859385006X" target="_blank">Wootton, J.C. and Federhen, S. (1993) <i>Statistics of local complexity in amino acid sequence and sequence database</i>. Comput. Chem. 17149–163</a>
+</p>
+
+
+<p><b>CAST:</b> CAST is capable of detecting compositionally biased regions (CBRs) and its main advantage is in the selective masking of single amino acids without influencing other important segments. CAST uses an internal database of 20 degenerate homopolymeric sequences and compares query sequences against them. CAST can detect overlapping CBRs of different residue types within the same sequence.
+    <br>
+	<br>
+	parameters:
+	<ul>
+		<li>threshold - threshold of the score for the regions with high scoring residues to be identified.</li>
+	</ul>
+<br />
+<a href="https://academic.oup.com/bioinformatics/article/16/10/915/223582" target="_blank">Promponas, V.J. et al. (2000) <i>CAST: an iterative algorithm for the complexity analysis of sequence tracts</i>. Bioinformatics, 16(10), 915–922</a>
+</p>
+
+<p><b>fLPS:</b> fLPS rapidly annotates CBRs by detecting both single- and multiple-residue biases. For each sequence fLPS searches for single-residue low-probability subsequences (LPSs), then iteratively looks for multiple-residue biases. For fLPS we provide two predefined parameter settings: fLPS default and fLPS strict. fLPS default is the default parameter setting provided by the author in the original publication and fLPS strict is the additional parameter set suggested by the method author as more suitable for detection of compositionally biased regions.
+	<br>
+	<br>
+	<ul>
+		<li>fLPS default: <i>m</i> = 15, <i>M</i> = 500, <i>t</i> = 0.001</li>
+		<li>fLPS strict: <i>m</i> = 5, <i>M</i> = 25, <i>t</i> = 0.00001</li>
+	</ul>
+    <br>
+	parameters:
+	<ul>
+		<li>m - minimum window size. It must be lower or equal to maximum window size and in range 5 - 1000.</li>
+        <li>M - maximum window size. It must be greater than or equal to minimum window size and in range 15 - 1000.</li>
+        <li>threshold - high bias probability binomial p-value threshold for a searched window of size from m to M. It must be lower than or equal to 0.001.</li>
+	</ul>
+<br />
+<a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-017-1906-3" target="_blank">Harrison, P.M. (2017) <i>fLPS: Fast discovery of compositional biases for the protein universe</i>. BMC Bioinformatics, 18(1):476.</a>
+</p>
+
+<p><b>SIMPLE:</b> Simple was first developed to identify simple sequences in DNA, and later was extended to detect comparably cryptic sequences in amino acid sequences . SIMPLE analysis provides two types of motif information: motif identity and motif hit frequency information—defined as the frequency with which a given motif is detected as being repeated (at a statistical significance threshold) within a given sequence.
+	<br>
+	<br>
+	parameters:
+	<ul>
+		<li>Scores - Points awarded to repeats of different length. From monomers to decamers. (The number of occurrences of a repeat in the sequence window is counted and multiplied by the points (p) awarded for a repeated motif of particular length. This parameter allow to study repeats of different lengths).</li>
+        <li>Window - window length for sequence detection. Decreasing window size increases detection of short tandem repeats. For protein sequences 2 is recommended.</li>
+        <li>Number of random sequences - Number of random sequences for control.</li>
+        <li>
+			Randomization method for construction of random sequences  (3 and 4 are best but slower):
+            <ul>
+				<li>1 - element frequency</li>
+				<li>2 - shuffle elements</li>
+				<li>3 - di-element frequency</li>
+				<li>4 - frame frequency</li>
+			</ul>
+        </li>
+        <li>stringency - Frequency cut-off (ratio score motif test sequence / score motif random sequences)</li>
+	</ul>
+<br />
+
+<a href="https://academic.oup.com/bioinformatics/article/18/5/672/199674" target="_blank">Alba, M.M. et al. (2002) <i>Detecting cryptically simple protein sequences using the SIMPLE algorithm</i>. Bioinformatics, 18(5), 672–678</a>
+<br />
+</p>
+
+<b>GBSC:</b> GBSC identifies  and  clusters repetitive  regions. It finds strings of repeats composed of one amino  acid  (homorepeats) or a  few  amino  acids (STRs - short tandem repeats).  This  algorithm also  identifies  and  retrieves  imperfect  tandem  repeats  from  protein  sequences  by  scanning  all  sequences  in  a  database.  Imperfect repeat detection  permits insertions in between repeats and mutations of amino acids within repetitive regions. The minimum length of homorepeats identified by the method is 6 and the minimum number of repeats in an STRs is 3. The positions of tandem repeat and the information about the type of repeat are collected for further analysis.
+<br />
+The clustering phase uses repeats and their assigned <i>types</i> (classification) found during identification of  tandem  repeats.  Additionally,  one  type  of  repeat  can be  followed  by  another  type  of  repeat  in  the protein sequence (i.e. <i>fused repeats</i>). Note that if a protein contains three different STRs which are placed next to each other, then the method will produce 6 clusters: three with regular STRs and three with fused repeats.
+	<br>
+	<br>
+	parameters:
+	<ul>
+		<li>distance threshold - maximal possible distance between repetitive patterns.</li>
+		<li>score threshold - minimal number of occurrences of the repetitive pattern to be classified as a low complexity region.</li>
+	</ul>
+<br />
+(Jarnot,  P.,  Ziemska-Legięcka, J., Grynberg, M., and Gruca, A., <i>in preparation</i>).
+
+<h3><a name="enrichment_description"></a>Enrichment/additional information:</h3>
+
+<p><b>Entropy:</b>Shannon entropy  is a simple quantitative measure of uncertainty in a data set. For a window of the length of 20 amino acids the Shannon entropy <i>H</i> is computed as follows:</p>
+
+<div><img src="../img/shannonEntropy.png" width="20%"></div>
+
+<p>where  <i>p<sub>i</sub></i> is the fraction of residues of amino acid type <i>i</i> and nd <i>M</i> is the number of amino acid types (20). <i>H</i> ranges from 0 (only one residue in present at that position) to 4.322 (all 20 residues are equally represented in that position). Therefore, the lower the value, the less complex sequence is.</p> 
+
+<p><b>Domains:</b> Domains are the building blocks of proteins and their combination allows for a diverse range of functions.Therefore their identification can give a hint about protein function. The <a href="https://pfam.xfam.org/">Pfam database</a> contains clustered protein families, represented as Multiple Sequence Alignments (MSA) and HMMs. These alignments are built using HMMER while structural domains are identified based on SCOP and CATH.<p>
+
+<p><b>Transmembrane topology and signal peptide predictor:</b> <a href="http://phobius.sbc.su.se/">Phobius</a> is a Hidden Markov Model (HMM) based prediction method. It is the updated and improved version of TMHMM, in which use of the original model was extended so that the method would be capable of detecting signal peptides. In the first part of the training for the new model, region boundaries were made flexible and the maximization was guided by the Baum-Welch algorithm. To find a global maximum, noise was added to the data, which was decreased by 5% at each iteration. In the second part of the training, the Viterbi algorithm was responsible for finding the final topology using results from the first training, allowing a flexibility of five residues at each region boundary.
+</p>
+
+<p><b>Amino acid frequencies:</b> Amino acid frequencies are calculated from the query sequence. The UniProtKB/Swiss-Prot database is used as a background database to highlight deviations.</p>
+
+
+
+<h2>Statistics</h2>
+<p>The performance of PlaToLoCo was tested on several reference proteomes, obtained from  UniProt in March 2019. The proteomes were filtered for redundancy using  CD-HIT  at 40% sequence identity. All SEG calculations were performed using the relaxed (default parameter setting. </p>
+
+
+<table border="1" style="width:100%">
+ <caption><b>Table 1. Running time measured on different proteomes</b><caption>
+<tr>
+	<th>Proteome</th>
+	<th>Sequences</th>
+	<th>Residues</th>
+	<th>Running time (min)</th>
+</tr>
+<tr>
+	<td>ARATH Arabidopsis thaliana (Mouse-ear cress)</td>
+	<td align="right">15884</td>
+	<td align="right">6505776</td>
+	<td align="right">62</td>
+</tr>
+<tr>
+	<td>BACSU Bacillus subtilis (strain 168)</td>
+	<td align="right">3886</td>
+	<td align="right">1113428</td>
+	<td align="right">20</td>
+</tr>
+<tr>
+	<td>CAEEL Caenorhabditis elegans</td>
+	<td align="right">15360</td>
+	<td align="right">6711294</td>
+	<td align="right">64</td>	
+</tr>
+<tr>
+	<td>DANRE Danio rerio (Zebrafish) (Brachydanio rerio)</td>
+	<td align="right">14704</td>
+	<td align="right">8738054</td>
+	<td align="right">51</td>	
+</tr>
+<tr>
+	<td>DROME Drosophila melanogaster (Fruit fly)</td>
+	<td align="right">11954</td>
+	<td align="right">6742168</td>
+	<td align="right">57</td>	
+</tr>
+<tr>
+	<td>ECOLI Escherichia coli (strain K12)</td>
+	<td align="right">3953</td>
+	<td align="right">1230745</td>
+	<td align="right">19</td>	
+</tr>
+<tr>
+	<td>HUMAN Homo sapiens (Human)</td>
+	<td align="right">14238</td>
+	<td align="right">8475786</td>
+	<td align="right">73</td>	
+</tr>
+<tr>
+	<td>METJA Methanocaldococcus jannaschii (strain ATCC 43067 / DSM 2661 / JAL-1 / JCM 10045 / NBRC 100440) (Methanococcus jannaschii)</td>
+	<td align="right">1694</td>
+	<td align="right">483423</td>
+	<td align="right">8</td>	
+</tr>
+<tr>
+	<td>PDB</td>
+	<td align="right">14461</td>
+	<td align="right">2873887</td>
+	<td align="right">30</td>	
+</tr>
+<tr>
+	<td>PLAF7 Plasmodium falciparum (isolate 3D7)</td>
+	<td align="right">4940</td>
+	<td align="right">3896130</td>
+	<td align="right">31</td>	
+</tr>
+<tr>
+	<td>YEAST Saccharomyces cerevisiae (strain ATCC 204508 / S288c) (Baker's yeast)</td>
+	<td align="right">5270</td>
+	<td align="right">2548147</td>
+	<td align="right">20</td>	
+</tr>
+<tr>
+	<td><b>TOTAL:</b></td>
+	<td align="right"><b>106344</b></td>
+	<td align="right"><b>49318838</b></td>
+	<td align="right">415</td>	
+</tr>
+</table>
+<br/>
+<br/>
+
+
+<table border="1" style="width:100%">
+ <caption><b>Table 2. Total number of residues found by each method<b/></caption>
+<tr>
+	<th>&nbsp;</th>
+	<th colspan="5">Number of residues in LCRs</th>
+</tr>
+<tr>
+	<td>Proteome</td>
+	<td align="center"><b>SEG</b></td>
+	<td align="center"><b>CAST</b></td>
+	<td align="center"><b>fLPS</b></td>
+	<td align="center"><b>SIMPLE</b></td>
+	<td align="center"><b>GBSC</b></td>
+</tr>
+<tr>
+	<td>ARATH Arabidopsis thaliana (Mouse-ear cress)</td>
+	<td align="right">498602</td>
+	<td align="right">1075544</td>
+	<td align="right">4695890</td>
+	<td align="right">52533</td>
+	<td align="right">37899</td>
+</tr>
+<tr>
+	<td>BACSU Bacillus subtilis (strain 168)</td>
+	<td align="right">44288</td>
+	<td align="right">45568</td>
+	<td align="right">668508</td>
+	<td align="right">1008</td>
+	<td align="right">879</td>
+</tr>
+<tr>
+	<td>CAEEL Caenorhabditis elegans</td>
+	<td align="right">521656</td>
+	<td align="right">1093499</td>
+	<td align="right">5081205</td>
+	<td align="right">39647</td>
+	<td align="right">38439</td>
+</tr>
+<tr>
+	<td>DANRE Danio rerio (Zebrafish) (Brachydanio rerio)</td>
+	<td align="right">732210</td>
+	<td align="right">1995121</td>
+	<td align="right">7138291</td>
+	<td align="right">43312</td>
+	<td align="right">53631</td>
+</tr>
+<tr>
+	<td>DROME Drosophila melanogaster (Fruit fly)</td>
+	<td align="right">784188</td>
+	<td align="right">1770045</td>
+	<td align="right">5427868</td>
+	<td align="right">110678</td>
+	<td align="right">93182</td>
+</tr>
+<tr>
+	<td>ECOLI Escherichia coli (strain K12)</td>
+	<td align="right">50921</td>
+	<td align="right">39277</td>
+	<td align="right">737010</td>
+	<td align="right">935</td>
+	<td align="right">1125</td>
+</tr>
+<tr>
+	<td>HUMAN Homo sapiens (Human)</td>
+	<td align="right">810998</td>
+	<td align="right">1834901</td>
+	<td align="right">7151468</td>
+	<td align="right">47616</td>
+	<td align="right">56295</td>
+</tr>
+<tr>
+	<td>METJA Methanocaldococcus jannaschii (strain ATCC 43067 / DSM 2661 / JAL-1 / JCM 10045 / NBRC 100440) (Methanococcus jannaschii)</td>
+	<td align="right">28406</td>
+	<td align="right">17065</td>
+	<td align="right">436828</td>
+	<td align="right">263</td>
+	<td align="right">370</td>
+</tr>
+	<td>PDB</td>
+	<td align="right">104208</td>
+	<td align="right">82647</td>
+	<td align="right">1464298</td>
+	<td align="right">15509</td>
+	<td align="right">11240</td>
+</tr>
+<tr>
+	<td>PLAF7 Plasmodium falciparum (isolate 3D7)</td>
+	<td align="right">759283</td>
+	<td align="right">2070029</td>
+	<td align="right">3843999</td>
+	<td align="right">53958</td>
+	<td align="right">153613</td>
+</tr>
+<tr>
+	<td>YEAST Saccharomyces cerevisiae (strain ATCC 204508 / S288c) (Baker's yeast)</td>
+	<td align="right">176012</td>
+	<td align="right">469362</td>
+	<td align="right">2006227</td>
+	<td align="right">11229</td>
+	<td align="right">12916</td>
+</tr>
+<tr>
+	<td><b>TOTAL:</b></td>
+	<td align="right"><b>4510772</b></td>
+	<td align="right"><b>10493058</b></td>
+	<td align="right"><b>38651592</b></td>
+	<td align="right"><b>376688</b></td>
+	<td align="right"><b>459589</b></td>
+</tr>
+</table>
+
+
+<br/>
+<br/>
+
+<table border="1" style="width:100%">
+<caption><b>Table 3. Percent of residues found using each method</b></caption>
+<tr>
+	<th>&nbsp;</th>
+	<th colspan="5">% of LCRs</th>
+</tr>
+<tr>
+	<td><br>Proteome</br></td>
+	<td align="center"><b>SEG</b></td>
+	<td align="center"><b>CAST</b></td>
+	<td align="center"><b>fLPS</b></td>
+	<td align="center"><b>SIMPLE</b></td>
+	<td align="center"><b>GBSC</b></td>
+</tr>
+<tr>
+	<td>ARATH Arabidopsis thaliana (Mouse-ear cress)</td>
+	<td align="right">7.66</td>
+	<td align="right">16.53</td>
+	<td align="right">72.18</td>
+	<td align="right">0.81</td>
+	<td align="right">0.58</td>
+</tr>
+<tr>
+	<td>BACSU Bacillus subtilis (strain 168)</td>
+	<td align="right">3.98</td>
+	<td align="right">4.09</td>
+	<td align="right">60.04</td>
+	<td align="right">0.09</td>
+	<td align="right">0.08</td>
+</tr>
+<tr>
+	<td>CAEEL Caenorhabditis elegans</td>
+	<td align="right">7.77</td>
+	<td align="right">16.29</td>
+	<td align="right">75.71</td>
+	<td align="right">0.59</td>
+	<td align="right">0.57</td>
+</tr>
+<tr>
+	<td>DANRE Danio rerio (Zebrafish) (Brachydanio rerio)</td>
+	<td align="right">8.38</td>
+	<td align="right">22.83</td>
+	<td align="right">81.69</td>
+	<td align="right">0.50</td>
+	<td align="right">0.61</td>
+</tr>
+<tr>
+	<td>DROME Drosophila melanogaster (Fruit fly)</td>
+	<td align="right">11.63</td>
+	<td align="right">26.25</td>
+	<td align="right">80.51</td>
+	<td align="right">1.64</td>
+	<td align="right">1.38</td>
+</tr>
+<tr>
+	<td>ECOLI Escherichia coli (strain K12)</td>
+	<td align="right">4.14</td>
+	<td align="right">3.19</td>
+	<td align="right">59.88</td>
+	<td align="right">0.08</td>
+	<td align="right">0.09</td>
+</tr>
+<tr>
+	<td>HUMAN Homo sapiens (Human)</td>
+	<td align="right">9.57</td>
+	<td align="right">21.65</td>
+	<td align="right">84.38</td>
+	<td align="right">0.56</td>
+	<td align="right">0.66</td>
+</tr>
+<tr>
+	<td>METJA Methanocaldococcus jannaschii (strain ATCC 43067 / DSM 2661 / JAL-1 / JCM 10045 / NBRC 100440) (Methanococcus jannaschii)</td>
+	<td align="right">5.88</td>
+	<td align="right">3.53</td>
+	<td align="right">90.36</td>
+	<td align="right">0.05</td>
+	<td align="right">0.08</td>
+</tr>
+<tr>
+	<td>PDB</td>
+	<td align="right">3.63</td>
+	<td align="right">2.88</td>
+	<td align="right">50.95</td>
+	<td align="right">0.54</td>
+	<td align="right">0.39</td>
+</tr>
+<tr>
+	<td>PLAF7 Plasmodium falciparum (isolate 3D7)</td>
+	<td align="right">19.49</td>
+	<td align="right">53.13</td>
+	<td align="right">98.66</td>
+	<td align="right">1.38</td>
+	<td align="right">3.94</td>
+</tr>
+<tr>
+	<td>YEAST Saccharomyces cerevisiae (strain ATCC 204508 / S288c) (Baker's yeast)</td>
+	<td align="right">6.91</td>
+	<td align="right">18.42</td>
+	<td align="right">78.73</td>
+	<td align="right">0.44</td>
+	<td align="right">0.51</td>
+</tr>
+<tr>
+	<td><b>TOTAL:</b></td>
+	<td align="right"><b>9.15</b></td>
+	<td align="right"><b>21.28</b></td>
+	<td align="right"><b>78.37</b></td>
+	<td align="right"><b>0.76</b></td>
+	<td align="right"><b>0.93</b></td>
+</tr>
+</table>
+<br /><br />
+<table border="1" style="width:60%">
+<caption><b>Table 4. Overlap between methods (# of residues)</b></caption>
+<tr>
+	<th>Overlap (residues)</th>
+	<th>SEG</th>
+	<th>CAST</th>
+	<th>fLSP</th>
+	<th>SIMPLE</th>
+	<th>GBSC</th>				
+</tr>
+<tr>
+	<td><b>SEG</b></td>
+	<td width = 80px align="center"> - </td>
+	<td align="right">2879926</td>
+	<td align="right">4331357</td>
+	<td align="right">318373</td>
+	<td align="right">436202</td>
+</tr>
+<tr>
+	<td><b>CAST</b></td>
+	<td>&nbsp;</td>
+	<td align="center"> - </td>
+	<td align="right">10305978</td>
+	<td align="right">299459</td>
+	<td align="right">421782</td>
+</tr>
+<tr>
+	<td><b>fLSP</b></td>
+	<td>&nbsp;</td>
+	<td >&nbsp;</td>
+	<td align="center"> - </td>
+	<td align="right">366716</td>
+	<td align="right">457825</td>
+</tr>
+<tr>
+	<td><b>SIMPLE</b></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td align="center"> - </td>
+	<td align="right">175682</td>
+</tr>
+<tr>
+	<td><b>GBSC</b></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td align="center"> - </td>
+</tr>
+</table>
+
+
+<br /><br />
+<table border="1" style="width:60%">
+<caption><b>Table 5. Overlap between methods (%)</b></caption>
+<tr>
+	<th>Overlap (residues)</th>
+	<th>SEG</th>
+	<th>CAST</th>
+	<th>fLSP</th>
+	<th>SIMPLE</th>
+	<th>GBSC</th>				
+</tr>
+<tr>
+	<td><b>SEG</b></td>
+	<td width = 80px align="center"> - </td>
+	<td align="right">5.84</td>
+	<td align="right">8.78</td>
+	<td align="right">0.65</td>
+	<td align="right">0.88</td>
+</tr>
+<tr>
+	<td><b>CAST</b></td>
+	<td>&nbsp;</td>
+	<td align="center"> - </td>
+	<td align="right">20.90</td>
+	<td align="right">0.61</td>
+	<td align="right">0.86</td>
+</tr>
+<tr>
+	<td><b>fLSP</b></td>
+	<td>&nbsp;</td>
+	<td >&nbsp;</td>
+	<td align="center"> - </td>
+	<td align="right">0.74</td>
+	<td align="right">0.93</td>
+</tr>
+<tr>
+	<td><b>SIMPLE</b></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td align="center"> - </td>
+	<td align="right">0.36</td>
+</tr>
+<tr>
+	<td><b>GBSC</b></td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td align="center"> - </td>
+</tr>
+
+</table>
+
+
+<br />
+<br />
+
+<table border="1" style="width:100%">
+<caption><b>Table 6. Overlap between between all methods</b></caption>
+<tr>
+	<th>Proteome</th>
+	<th>Residues</th>
+	<th> % </th>
+</tr>
+<tr>
+	<td>ARATH Arabidopsis thaliana (Mouse-ear cress)</td>
+	<td align = "right">14931</td>
+	<td align = "right">0.23</td>
+</tr>
+<tr>
+	<td>BACSU Bacillus subtilis (strain 168)</td>
+	<td align = "right">101</td>
+	<td align = "right">0.01</td>
+</tr>
+<tr>
+	<td>CAEEL Caenorhabditis elegans</td>
+	<td align = "right">12533</td>
+	<td align = "right">0.19</td>
+</tr>
+<tr>
+	<td>DANRE Danio rerio (Zebrafish) (Brachydanio rerio)</td>
+	<td align = "right">16701</td>
+	<td align = "right">0.19</td>
+</tr>
+<tr>
+	<td>DROME Drosophila melanogaster (Fruit fly)</td>
+	<td align = "right">45420</td>
+	<td align = "right">0.67</td>
+</tr>
+<tr>
+	<td>ECOLI Escherichia coli (strain K12)</td>
+	<td align = "right">112</td>
+	<td align = "right">0.01</td>
+</tr>
+<tr>
+	<td>HUMAN Homo sapiens (Human)</td>
+	<td align = "right">19192</td>
+	<td align = "right">0.23</td>
+</tr>
+<tr>
+	<td>METJA Methanocaldococcus jannaschii (strain ATCC 43067 / DSM 2661 / JAL-1 / JCM 10045 / NBRC 100440) (Methanococcus jannaschii)</td>
+	<td align = "right">38</td>
+	<td align = "right">0.01</td>
+</tr>
+<tr>
+	<td>PDB</td>
+	<td align = "right">5621</td>
+	<td align = "right">0.20</td>
+</tr>
+<tr>
+	<td>PLAF7 Plasmodium falciparum (isolate 3D7)</td>
+	<td align = "right">38463</td>
+	<td align = "right">0.99</td>
+</tr>
+<tr>
+	<td>YEAST Saccharomyces cerevisiae (strain ATCC 204508 / S288c) (Baker's yeast)</td>
+	<td align = "right">4904</td>
+	<td align = "right">0.19</td>
+</tr>
+<tr>
+	<td><b>TOTAL:</b></td>
+	<td align = "right"><b>158016</b></td>
+	<td align = "right"><b>0.32</b></td>
+</tr>
+</table>
+<br /><br />
+<h2>Browser compatibility</h2>
+<table border="1" style="width:50%">
+<tr>
+<th align="center">OS</th>
+<th align="center">Chrome</th>
+<th align="center">Firefox</th>
+<th align="center">Microsoft Edge</th>
+<th align="center">Safari</th>
+</tr>
+<tr>
+<td align="center">Linux</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">n/a</td>
+<td align="center">n/a</td>
+</tr>
+<tr>
+<td align="center">MacOS</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">n/a</td>
+<td align="center">yes</td>
+</tr>
+<tr>
+<td align="center">Windows</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">n/a</td>
+</tr>
+
+</table>
+
+</div>

@@ -1,0 +1,79 @@
+<div style="margin:50px 100px; width:1000px;">
+<h2>Tutorial:</h2>
+ <ol>
+  <li><h5><a href="#!/tutorial#input_format">Input format, prediction types</a></h5></li>
+  <li><h5><a href="#!/tutorial#results_summary">Results - summary panel</a></h5></li>
+  <li><h5><a href="#!/tutorial#results_details">Results - detailed panel</a></h5></li>
+</ol>
+
+
+
+<h3><a name="input_format"></a>1. Input format, prediction types:</h3>
+
+
+    <p>
+        Users can select different Low Complexity Region detection methods based on their choice. In addition, various additional analyses are available: PFAM domain detection, transmembrane segment prediction and calculation of amino acid frequencies. For a brief introduction to these methods, see the Description of the server.
+    </p>
+<img src="../img/fig01_inputFormat.png" width="75%">
+    <p>
+        By default all method parameters are set as suggested by the authors of the original papers, however by clicking the black triangle next to selected method the user can expand its parameters and modify the values for that particular method.
+        We also provide predefined parameter settings for SEG and fLPS: SEG-intermediate, SEG-strict and fLPS-strict. Please refer to the documentation section for more details.
+    </p>
+
+<div><img src="../img/fig02_methodsParamters.png" width = "50%"></div>
+
+<p>
+   After submission it takes a few seconds per protein to calculate the results, depending on the sequence length and server load. If you do not have time to wait for the results, please save your job ID. The results are stored on our webserver for a maximum  of seven days and can be accessed later, using the <i>Job</i> menu.
+</p>
+
+
+<div><img src="../img/fig03_jobWaiting.png" width = "60%"></div>
+
+
+<h3><a name="results_summary"></a>2. Results - summary panel:</h3>
+<p> This panel is for visualizing information about low complexity regions found using the selected methods on the submitted protein(s). You can select the following views:
+<ul>
+    <li>Methods (stretched): Stretch all sequences to the window size and display all LCR predictions for each sequence.</li>
+    <li>Methods (relative):  Use the longest sequence as a reference and stretch it to the window size. Other sequences are shown relative to the longest sequence. This mode displays all LCR predictions for each sequence.</li>
+    <li>Consensus (sum): Displays the consensus of each method for every sequence.</li>
+</ul>
+<p>Users can also filter their results using the search box by defining query IDs.</p>    <div><img src="../img/fig04_summaryPanel.png" width = "90%"></div>
+
+<p>Clicking on the header of any prediction opens up  a panel with detailed information for the selected protein. </p>
+
+
+
+<h3><a name="results_details"></a>3. Results - detailed panel</h3>
+<h4>Sequence details</h4>
+<p>
+A graphical representation of the LCR regions detected by the selected methods. The graph consists of four parts.
+<ul>
+<li>The amino acid sequence is shown on the top</li>
+<li>LCR results, Shannon entropy, and the selected enrichment information are shown in the middle. Note, that some LCR detection method display biased regions for different residues (or residue pairs), therefore they will appear on multiple lines  in this panel.</li>
+<li>The position in the given sequence is shown at the bottom.</li>
+</ul>
+The selected segment can be highlighted by clicking on any of the detected LCR regions,, so the user can compare  different outputs. In addition, regions can be further inspected by left clicking and zooming inon an area of interest.
+</p>
+
+<div><img src="../img/fig05_sequecnceDetails.png" width = "90%"></div>
+
+<h4>Amino acid frequency:</h4>
+<!--<p>This panel shows the amino acid distribution of the sequence (gray bars) compared to a background database (blue bars;  for more information see the Documentation of the server).</p>-->
+    <p>Amino acid frequency bar chart presents the comparison of sequence frequencies vs. database frequencies. Bars on top of the chart allow to switch on/off between databases: UniProt/SwissProt, nextProt, DistProt and PDB. Selection of a specific LCR in the upper Sequence detail chart results in a new Amino acid frequency chart that shows the frequencies for this specific region. The amino acid frequency results can be also downloaded in text format by clicking “Download CSV” button.</p>
+<div><img src="../img/fig08_aaFrequency.png" width = "60%"></div>
+
+<h4>Method consensus:</h4>
+<p>Users can personalize their results by selecting their preferred LCR detection methods and obtaining a consensus result, or using a strict definition calculated from the intersection of selected results, or using a more permissive definition calculated from the union of the results. By clicking “Download LCRs” button below the sequence, the user can download selected consensus results in fasta format.</p>
+<div><img src="../img/fig06_methodsConsensus.png" width = "55%"></div>
+
+<h4>Pfam & PDB details</h4>
+<p>Pfam & PDB details section provides detailed information about Pfam domains annotated to the analyzed sequence as well as PDB structures associated with that domain. By clicking “Show PDB” button next to a particular domain the user can obtain a list of links to PDB structures associated with that domain. Please note that this section is visible only if there exists any Pfam domains that are annotated to the sequence. </p>
+<div><img src="../img/pfamDetails.png" width = "60%"></div>
+
+<h4>Region details</h4>
+<p>A summary of all predicted LCR regions displaying which amino acids are enriched in their sequences.</p>
+<div><img src="../img/fig07_regionDetails.png" width = "60%"></div>
+
+
+
+</div>

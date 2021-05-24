@@ -1,0 +1,113 @@
+
+<br><br>
+<div class="detailBgFirst detailElement">
+    <div class="detailBar"><div class="detailBarPoint"></div><div class="detailBarText">Sequence details</div>
+        <div class="detailBarHelp">
+            <a type="button" id="popover_sequence_details" class="header-help" data-placement="right" title="" data-content="Below is a feature viewer that presents regions found by each of the selected method with additional enrichment which are: sequence entropy, Phobius and Pfam." style="font-size: 1.5em;" data-original-title="Help"><span class="label label-as-badge">?</span></a>
+        </div>
+    </div>
+    <a ng-href="https://uniprot.org/uniprot/{{uniprot_id}}" target="_blank">{{header}}</a><br>
+    <div id="fv1"></div>
+    <input class="thumbnailbutton" type="button" ng-click="downloadFv('fv1')" value="Download figure"/>
+    <br><br>
+    <br>
+</div>
+
+<div ng-show="aafrequency_visible" id="detailAaFreq" class="detailBgSecond detailElement">
+    <div class="detailBar"><div class="detailBarPoint"></div><div class="detailBarText">Amino acid frequency</div>
+        <div class="detailBarHelp">
+            <a type="button" id="popover_aa_freq" class="header-help" data-placement="right" title="" data-content="Amino acid frequency bar chart presents the comparison of sequence frequencies vs. database frequencies. Bars on top of the chart allow to switch on/off different types of data. Selection of a specific LCR in the upper Sequence detail chart results in a new Amino acid frequency chart that shows the frequencies for this specific region." style="font-size: 1.5em;" data-original-title="Help"><span class="label label-as-badge">?</span></a>
+        </div>
+    </div>
+
+    <div style="width:1000px;">
+        <br>
+        <br>
+        <span style="font-size: 24px;"><center>The sequence frequencies for the region selected above in the feature-viewer</center></span>
+        <span style="font-size: 14px;"><center>Click to select:</center></span>
+        <canvas id="bar" class="chart chart-bar"
+                chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colors="colors">
+        </canvas>
+    </div>
+    <input class="thumbnailbutton" type="button" ng-click="downloadAaFreq('bar')" value="Download figure"/>
+    <input class="thumbnailbutton" type="button" ng-click="downloadAaFreqCsv()" value="Download CSV"/>
+    <br>
+    <br>
+    <br>
+</div>
+
+<div id="detailMethods" class="detailBgSecond detailElement">
+    <div class="detailBar"><div class="detailBarPoint"></div><div class="detailBarText">Methods consensus</div>
+        <div class="detailBarHelp">
+            <a type="button" id="popover_method_consensus" class="header-help" data-placement="right" title="" data-content="To highlight low complexity region select methods of interest. Type intersection will highlight LCRs that are common for all selected methods. Type sum will highlight all LCRs found by selected methods." style="font-size: 1.5em;" data-original-title="Help"><span class="label label-as-badge">?</span></a>
+        </div>
+    </div>
+    <ul class="methods">
+        <li ng-repeat="method in methods">
+            <input type="checkbox" ng-model="method.isSelected" ng-change="consensusChanged()"/><span class="checkboxtext">{{method.method}}</span>
+        </li>
+    </ul>
+    Type:
+    <select name="consensusType" id="consensusType" ng-model="consensusType" ng-change="consensusChanged()">
+        <option value="intersection">Intersection</option>
+        <option value="sum">Sum</option>
+    </select><br>
+
+    <font face=monospace>
+        <div id="consensus" ng-bind-html="consensusSequence|trustAsHtml" ></div>
+    </font> <br>
+
+    <input class="thumbnailbutton" type="button" ng-click="downloadFastaLcrs()" value="Download LCRs"/>
+    <br><br>
+</div>
+
+<br><br>
+
+<div id="pfam_section" class="detailBgSecond detailElement" style="display:none;">
+    <div class="detailBar"><div class="detailBarPoint"></div><div class="detailBarText">Pfam & PDB details</div>
+        <div class="detailBarHelp">
+            <a type="button" id="popover_pfam" class="header-help" data-placement="right" title="" data-content="The Pfam domain and PDB structure databases annotated in this protein sequence are shown. The PDB structure corresponds to the Pfam domain. In order to see PDB structures click Show PDB. For Pfam details please click the PFXXXXX domain link." style="font-size: 1.5em;" data-original-title="Help"><span class="label label-as-badge">?</span></a>
+        </div>
+        <br>
+        <ul class="details">
+            <li ng-repeat="pfamregion in pfamregions" class="thumbnail">
+                <canvas id="pfam_{{pfamregion.pfamacc}}_{{pfamregion.beg}}_{{pfamregion.end}}" ng-bind="bindCanvasPfam(pfamregion)"></canvas>
+                <input style="margin-top:-4px;" class="thumbnailbutton" type="button" ng-click="expandPdb('pdb_section_' + pfamregion.pfamacc + '_' + pfamregion.beg + '_' + pfamregion.end)" value="Show PDB"/>
+                <input class="thumbnailbutton" type="button" ng-click="collapsePdb('pdb_section_' + pfamregion.pfamacc + '_' + pfamregion.beg + '_' + pfamregion.end)" value="Hide PDB"/>
+                <a ng-href="https://pfam.xfam.org/family/{{pfamregion.pfamacc}}" target="_blank">{{pfamregion.pfamacc}}: {{pfamregion.description}}</a><br>
+
+                <div style="display: none;" id="pdb_section_{{pfamregion.pfamacc}}_{{pfamregion.beg}}_{{pfamregion.end}}">
+                    <br>
+                    <ul class="details">
+                        <li ng-repeat="pdb in pfamregion.pdbs" class="thumbnail">
+                            <a ng-href="http://www.rcsb.org/pdb/explore/remediatedSequence.do?structureId={{pdb.acc}}" target="_blank">{{pdb.acc}}: {{pdb.description}}</a><br>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <br><br>
+</div>
+<div id="detailDetails" class="detailBgFirst detailElement">
+    <div class="detailBar"><div class="detailBarPoint"></div><div class="detailBarText">Region details</div>
+        <div class="detailBarHelp">
+            <a type="button" id="popover_region_details" class="header-help" data-placement="right" title="" data-content="This section presents low complexity regions found by each of the method with additional information about its characteristic." style="font-size: 1.5em;" data-original-title="Help"><span class="label label-as-badge">?</span></a>
+        </div>
+    </div>
+    <ul id="methodsDetails" class="methods">
+        <li ng-repeat="method in methods" class="thumbnail">
+            {{method.method}}<br>
+
+            <ul class="details">
+                <li ng-repeat="region in method.regions" class="thumbnail">
+<!--                    <canvas id="canvas_{{method.method}}_{{region.beg}}_{{region.end}}" ng-bind="bindCanvas(method, region)"></canvas>-->
+                    <canvas id="canvas_{{method.method}}_{{region.i}}" ng-bind="bindCanvas(method, region)"></canvas>
+                    {{region.beg}} - {{region.end}}: {{region.description}}<br>
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+    <br><br>
+</div>

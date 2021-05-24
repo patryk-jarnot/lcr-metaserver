@@ -1,0 +1,3 @@
+* * * * * /bin/bash /home/pjarnot/data/repo/git/lcr-metaserver/scripts/keep_project_alive.sh
+30 1 * * * /bin/bash /home/pjarnot/data/repo/git/lcr-metaserver/scripts/remove_old_data.sh
+35 1 1 * * /bin/bash /home/pjarnot/data/repo/git/lcr-metaserver/scripts/update_db_frequency.sh

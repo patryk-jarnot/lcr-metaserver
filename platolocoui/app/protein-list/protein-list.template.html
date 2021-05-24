@@ -1,0 +1,40 @@
+<div class="container-fluid" style="padding:40px;">
+  <div class="row">
+    <div class="col-md-2">
+      <p>
+        Search:
+        <input ng-model="$ctrl.query" />
+      </p>
+
+      <p>
+        View:<br>
+          <input type="radio" ng-model="viewType" value="methodsStretched" ng-change="viewChanged()">Methods (stretched)<br>
+          <input type="radio" ng-model="viewType" value="methodsRelative" ng-change="viewChanged()">Methods (relative)<br>
+          <input type="radio" ng-model="viewType" value="consensusSum" ng-change="viewChanged()">Consensus (sum)<br>
+      </p>
+
+    </div>
+    <div class="col-md-10">
+        <div style="margin-left:40px; font-size:26px;">
+            <span ng-show="name_visible"><b>Job name:</b> {{name}}<br></span>
+            <b>Job ID:</b> {{token}}
+            <br><br>
+            <b>List of the results (click the item for more details):</b>
+        </div><br>
+        <ul class="proteins">
+            <li ng-repeat="protein in $ctrl.proteins | filter:$ctrl.query | orderBy:$ctrl.orderProp" class="thumbnail protlistitem"  onresize="widthResized()">
+                <a href="#!/protein/{{token}}/{{protein.id}}" target="_blank">
+                    <div>
+                {{protein.header}}
+
+                <font face="monospace">
+                    <div ng-bind-html="protein.lcr_intervals|trustAsHtml" ></div>
+                </font>
+                <canvas id="canvas_{{protein.id}}" ng-bind="bindCanvas(protein)"></canvas>
+                        </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+  </div>
+</div>

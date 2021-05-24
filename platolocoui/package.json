@@ -1,0 +1,46 @@
+{
+  "name": "platoloco",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Platform of low complexity regions",
+  "repository": "https://gitlab.com/agruca/lcr-metaserver.git",
+  "license": "GPL",
+  "dependencies": {
+    "angular": "1.7.x",
+    "angular-animate": "1.7.x",
+    "angular-chart.js": "^1.1.1",
+    "angular-resource": "1.7.x",
+    "angular-route": "1.7.x",
+    "bootstrap": "3.3.x",
+    "canvg": "^3.0.5",
+    "feature-viewer": "^0.1.44",
+    "jquery": "^3.6.0",
+    "xml-js": "1.6.x"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.7.x",
+    "cpx": "^1.5.0",
+    "http-server": "^0.12.3",
+    "jasmine-core": "^3.3.0",
+    "karma": "^3.1.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-jasmine": "^1.1.2",
+    "protractor": "^5.4.1"
+  },
+  "scripts": {
+    "postinstall": "npm run copy-libs",
+    "update-deps": "npm update",
+    "postupdate-deps": "npm run copy-libs",
+    "copy-libs": "cpx \"node_modules/{angular,angular-*,html2canvas/dist,canvg,xml-js/dist,chart.js/dist,feature-viewer/dist,bootstrap/dist,jquery/dist}/**/*\" app/lib -C",
+    "prestart": "npm install",
+    "start": "http-server ./app -a 127.0.0.1 -p 8000 -c-1",
+    "pretest": "npm install",
+    "test": "karma start karma.conf.js",
+    "test-single-run": "npm test -- --single-run",
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor e2e-tests/protractor.conf.js"
+  }
+}
