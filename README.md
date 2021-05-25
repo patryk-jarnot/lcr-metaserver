@@ -3,6 +3,8 @@
 
 PlaToLoCo is a web server that allows you analyse low complexity regions in proteins.
 
+Online version is available here: http://platoloco.aei.polsl.pl
+
 ## Features
 
 - Run selected methods for low complexity regions identification
