@@ -20,7 +20,7 @@ class Gbsc(Method):
 
         FNULL = open(os.devnull, 'w')
         # params = "gbsc --output-format=1" if self.params is None else 'gbsc --output-format=1 {0}'.format(self.params)
-        params = "gbsc --output-format=1 {0}".format(self.params)
+        params = "gbsc identify --output-format=1 {0}".format(self.params)
         p = Popen(params.split(), stdout=PIPE, stdin=PIPE, stderr=FNULL)
 
         stdout = p.communicate(input=input.encode("ascii"))[0]
