@@ -1,0 +1,8 @@
+.git/
+.idea/
+venv2/
+venv/
+wrapper/
+platolocorestapi/data/cafs/
+platolocorestapi/data/uniprot_sprot.fasta
+platolocoui/node_modules/

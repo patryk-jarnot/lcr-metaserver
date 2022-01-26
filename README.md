@@ -13,6 +13,21 @@ Online version is available here: http://platoloco.aei.polsl.pl
 - Phobius, Pfam and PDB enrichment
 - Download figures
 
+## Docker
+
+Build docker image
+
+```
+make build
+```
+
+Run the image
+
+```
+make run
+```
+Visit: http://localhost:8000
+
 ## Installation
 
 ### Ubuntu

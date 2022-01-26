@@ -34,7 +34,7 @@
     "postupdate-deps": "npm run copy-libs",
     "copy-libs": "cpx \"node_modules/{angular,angular-*,html2canvas/dist,canvg,xml-js/dist,chart.js/dist,feature-viewer/dist,bootstrap/dist,jquery/dist}/**/*\" app/lib -C",
     "prestart": "npm install",
-    "start": "http-server ./app -a 127.0.0.1 -p 8000 -c-1",
+    "start": "http-server ./app -a 0.0.0.0 -p 8000 -c-1",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
     "test-single-run": "npm test -- --single-run",
