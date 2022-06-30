@@ -10,16 +10,12 @@ class Gbsc(Method):
         self.params = None
 
     def set_params(self, parameters):
-        # self.params = parameters
         self.params = "--score-threshold {0} --distance-threshold {1}".format(parameters['score'], parameters['distance'])
-        # self.params = self.params.replace("score-threshold", "--score-threshold")
-        # self.params = self.params.replace("distance-threshold", "--distance-threshold")
 
     def identify(self, protein_list, proteins):
         input = self.create_fasta_from_sequences(proteins)
 
         FNULL = open(os.devnull, 'w')
-        # params = "gbsc --output-format=1" if self.params is None else 'gbsc --output-format=1 {0}'.format(self.params)
         params = "gbsc identify --output-format=1 {0}".format(self.params)
         p = Popen(params.split(), stdout=PIPE, stdin=PIPE, stderr=FNULL)
 
@@ -28,14 +24,9 @@ class Gbsc(Method):
         parsed_output = self.parse_output(protein_list, proteins)
         return parsed_output
 
-        # for record in parsed_output:
-        #     output_frame = self.fill_output(record, output_frame)
-
-        # return output_frame
 
     def parse_output(self, protein_list, proteins):
         retval = []
-        # current_record = None
         order_id = -1
         cur_id = 0
         method = None
@@ -46,8 +37,6 @@ class Gbsc(Method):
                 order_id += 1
                 protein_list[order_id]['GBSC'] = []
                 method = {'method': 'GBSC', "regions": []}
-                # current_record = Method.MethodRecord()
-                # current_record.header = line.strip("\n")
             else:
                 amino_acids = line.split("|")[1]
                 line_items = line.split("|")[0].split("-")

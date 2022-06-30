@@ -132,7 +132,7 @@ angular.
                             }
                             else {
                                 var lines = aReader.result.match(/\S+/g) || []
-                                var query = 'https://www.uniprot.org/uniprot/?query='
+                                var query = 'https://rest.uniprot.org/uniprotkb/search?query='
                                 if (lines.length > 2500) {
                                     alert("Number of sequences should not be greather than 2500")
                                     return 0;
@@ -143,7 +143,7 @@ angular.
                                         alert('Invalid uniprot AC: ' + lines[i]);
                                         return 0;
                                     }
-                                    query += 'id%3A' + lines[i].trim()
+                                    query += 'accession%3A' + lines[i].trim()
                                     if (i !=lines.length-1) {
                                         query += "+OR+";
                                     }
@@ -171,7 +171,7 @@ angular.
                         }
                         else {
                             var lines = $scope.input_text.match(/\S+/g) || []
-                            var query = 'https://www.uniprot.org/uniprot/?query='
+                            var query = 'https://rest.uniprot.org/uniprotkb/search?query='
                             if (lines.length > 2500) {
                                 alert("Number of sequences should not be greather than 2500")
                                 return 0;
@@ -182,7 +182,7 @@ angular.
                                     alert('Invalid uniprot AC: ' + lines[i]);
                                     return 0;
                                 }
-                                query += 'id%3A' + lines[i].trim()
+                                query += 'accession%3A' + lines[i].trim()
                                 if (i !=lines.length-1) {
                                     query += "+OR+";
                                 }
