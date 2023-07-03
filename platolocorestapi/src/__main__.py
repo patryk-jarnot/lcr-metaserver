@@ -5,14 +5,13 @@ import flask.scaffold
 flask.helpers._endpoint_from_view_func = flask.scaffold._endpoint_from_view_func
 
 from flask_restful import Resource, Api
-import platolocorestapi.src.utils.cafs as cafs
-from platolocorestapi.src.api.enrichmentmodule.enrichmentrunner import EnrichmentRunner
-from platolocorestapi.src.api.wrappermodule.wrapperrunner import WrapperRunner
-import platolocorestapi.src.api.query as query_parser
-import platolocorestapi.src.api.aafrequency as aafrequency
+import src.utils.cafs as cafs
+from src.api.enrichmentmodule.enrichmentrunner import EnrichmentRunner
+from src.api.wrappermodule.wrapperrunner import WrapperRunner
+import src.api.query as query_parser
+import src.api.aafrequency as aafrequency
 
 import threading
-import time
 import json
 import traceback
 

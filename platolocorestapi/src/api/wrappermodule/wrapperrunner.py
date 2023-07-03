@@ -1,5 +1,5 @@
-from platolocorestapi.src.wrapper.methods.methodbuilder import MethodBuilder
-import platolocorestapi.src.wrapper.utils.shannonutils as su
+from src.wrapper.methods.methodbuilder import MethodBuilder
+import src.wrapper.utils.shannonutils as su
 
 
 class WrapperRunner:

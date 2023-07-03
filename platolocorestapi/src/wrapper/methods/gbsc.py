@@ -1,4 +1,4 @@
-from platolocorestapi.src.wrapper.methods.method import Method
+from src.wrapper.methods.method import Method
 from subprocess import Popen, PIPE, STDOUT
 import os
 
@@ -24,7 +24,6 @@ class Gbsc(Method):
         parsed_output = self.parse_output(protein_list, proteins)
         return parsed_output
 
-
     def parse_output(self, protein_list, proteins):
         retval = []
         order_id = -1
@@ -47,30 +46,9 @@ class Gbsc(Method):
                 region = {'i': cur_id, 'beg': beg, 'end': end, 'description': "{0} rich repetitive region".format(amino_acids)}
                 cur_id += 1
                 method['regions'].append(region)
-                # current_record.ranges.append((int(line_items[0].strip()), int(line_items[1].strip())))
-                # current_record.labels.append("SEG")
 
         if method is not None:
             proteins[order_id]['data']['wrapper'].append(method)
-        # if current_record is not None:
-        #     retval.append(current_record)
-
-    # def parse_output(self, protein_list, proteins):
-    #     retval = []
-    #     current_record = None
-    #     for line in self.output.splitlines():
-    #         if line.startswith(">"):
-    #             if current_record is not None:
-    #                 retval.append(current_record)
-    #             current_record = Method.MethodRecord()
-    #             current_record.header = line.strip("\n")
-    #         else:
-    #             line_items = line.split("-")
-    #             current_record.ranges.append((int(line_items[0].strip()), int(line_items[1].strip())))
-    #             current_record.labels.append("GBSC")
-    #
-    #     if current_record is not None:
-    #         retval.append(current_record)
 
         return retval
 

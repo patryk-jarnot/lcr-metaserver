@@ -1,9 +1,7 @@
-from platolocorestapi.src.wrapper.methods.method import Method
+from src.wrapper.methods.method import Method
 from subprocess import Popen, PIPE
 import os
 import re
-
-import logging
 
 
 class Simple(Method):
@@ -31,8 +29,6 @@ class Simple(Method):
                     parameters['rand_method'],
                     parameters['stringency']
                 )
-        # if parameters is not None:
-        #     logging.warning("Changing parameters for simple is not supported")
 
     def identify(self, protein_list, proteins):
         for i in range(len(proteins)):
@@ -65,24 +61,4 @@ class Simple(Method):
                 self.cur_id += 1
 
         proteins[0]['data']['wrapper'].append(method)
-
-    # def parse_output(self, protein_list, proteins):
-    #     retval = []
-    #     current_record = None
-    #     for line in self.output.splitlines():
-    #         if len(re.findall('-', line)) == 2:
-    #             range = re.findall('\d+', line)
-    #             beg = int(range[0])
-    #             end = int(range[1])
-    #             if current_record is None or current_record.header != self.current_header:
-    #                 if current_record is not None:
-    #                     retval.append(current_record)
-    #                 current_record = Method.MethodRecord()
-    #                 current_record.header = self.current_header
-    #             current_record.ranges.append((beg, end))
-    #             current_record.labels.append("simple")
-    #
-    #     if current_record is not None:
-    #         retval.append(current_record)
-    #     return retval
 

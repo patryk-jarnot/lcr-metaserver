@@ -1,11 +1,9 @@
 from abc import ABC, abstractmethod
 
-from platolocorestapi.src.wrapper.domain.sequencedata import SequenceData, AminoAcidData
-import platolocorestapi.src.wrapper.utils.shannonutils as su
+from src.wrapper.domain.sequencedata import SequenceData, AminoAcidData
+import src.wrapper.utils.shannonutils as su
 
-import platolocorestapi.src.wrapper.utils.fastautils as fu
-
-import math
+import src.wrapper.utils.fastautils as fu
 
 
 class Method(ABC):
@@ -37,7 +35,7 @@ class Method(ABC):
         for i in range(len(sequence.sequence)):
             aa_data = AminoAcidData()
             aa_data.position = i+1
-            aa_data.score = su.compute_entropy(sequence.sequence[int(max(0, i-(self.shannon_range/2))):int(min(len(sequence.sequence)-1, i+(self.shannon_range/2)))])
+            aa_data.score = su.compute_entropy(sequence.sequence[int(max(0, int(i-(self.shannon_range/2)))):int(min(len(sequence.sequence)-1, int(i+(self.shannon_range/2))))])
             sequence_data.amino_acids.append(aa_data)
 
         return sequence_data
@@ -63,27 +61,15 @@ class Method(ABC):
             input += "{0}\n".format(sequence['header'])
             input += "{0}\n".format(sequence['sequence'])
 
-        # if seq.header not in sequence_data_dict:
-        #     if short_header:
-        #         sequence_data_dict[seq.header[1:seq.header.find(' ')]] = self.create_sequence_data(seq)
-        #     else:
-        #         sequence_data_dict[seq.header] = self.create_sequence_data(seq)
         return input
 
     def create_fasta(self, sequence, short_header=False):
         input = ''
         input += "{0}\n".format(sequence.header)
         input += "{0}\n".format(sequence.sequence)
-            # if seq.header not in sequence_data_dict:
-            #     if short_header:
-            #         sequence_data_dict[seq.header[1:seq.header.find(' ')]] = self.create_sequence_data(seq)
-            #     else:
-            #         sequence_data_dict[seq.header] = self.create_sequence_data(seq)
         return input
 
     def fill_sequence_data(self, record, sequence_data):
-        # for record in seg_records:
-        # for r in record.ranges:
         for j in range(len(record.ranges)):
             for i in range(record.ranges[j][0]-1, record.ranges[j][1]):
                 sequence_data.amino_acids[i].is_lcr = 1

@@ -1,7 +1,7 @@
 import sys
 import os
-from platolocorestapi.src.domain.protdomain import *
-import platolocorestapi.src.domain.protdomain as pd
+from src.domain.protdomain import *
+import src.domain.protdomain as pd
 import re
 
 

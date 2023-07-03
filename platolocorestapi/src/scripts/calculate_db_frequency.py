@@ -1,4 +1,4 @@
-import platolocorestapi.src.utils.fasta as fasta
+import src.utils.fasta as fasta
 from optparse import OptionParser
 import json
 

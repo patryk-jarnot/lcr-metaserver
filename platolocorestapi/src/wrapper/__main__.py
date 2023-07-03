@@ -4,23 +4,15 @@ from optparse import OptionParser
 
 import sys
 import logging
-# import pandas as pd
 import numpy as np
-import traceback
 
-# try:
 from src.methods.methodbuilder import MethodBuilder
 from src.domain.sequence import Sequence
-import src.utils.fastautils as fu
 import src.utils.shannonutils as su
-# except ModuleNotFoundError as e:
-#     print("Use init.sh (source ./init.sh) script to initialise environment")
-#     sys.exit(-1)
 
 
 def parse_sequences(input_stream):
     current_sequence = None
-    #for line in input_stream.readline():
     line = input_stream.readline()
     while line != "":
         if line.startswith(">"):
@@ -69,7 +61,6 @@ def get_params(options, method):
 def get_options():
     parser = OptionParser(description="This software takes sequences from stdin in fasta format. Output is written to stdout in tabular format")
     parser.add_option("-v", "--version", action="store_true", dest="version", default=False)
-    # parser.add_option("-m", "--methods", dest="methods", default='gbsc cast flps seg-strict seg-intermediary seg-relaxed simple',
     parser.add_option("-i", "--input", dest="input", default=None,
                       help="File from which sequences will be readed. If no specify then it is stdin", metavar="FILE")
     parser.add_option("-o", "--output", dest="output", default=None,
@@ -101,9 +92,6 @@ def get_options():
     return options, args
 
 
-# cols = ["uniprot_id", "position", "is_lcr", "labels", "entropy"]
-
-
 def print_header(output):
     output.write("sequence_header;position;amino_acid;is_lcr;labels;entropy\n")
 
@@ -129,7 +117,6 @@ def update_matrix(output_matrix, output_table):
 
 
 def print_matrix(output, output_matrix):
-    # np.savetxt(output, output_matrix, delimiter=';')
     for line in output_matrix:
         output.write(";".join(line))
         output.write("\n")
@@ -173,10 +160,6 @@ def main(options, args):
         output = sys.stdout
 
     methods = options.methods.split(" ")
-
-    # print(output_frame)
-    #
-    # return None
 
     try:
         print_header(output)

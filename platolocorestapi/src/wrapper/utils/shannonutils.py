@@ -31,7 +31,6 @@ def compute_entropy(sequence):
 
 
 if __name__ == '__main__':
-    # print(compute_entropy("QWERTYUIOPASDFGHJKLZ"))
     print(compute_entropy("AAAAAAAAAABBBBBBBBBB"))
 
 

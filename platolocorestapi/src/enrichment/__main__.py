@@ -3,9 +3,9 @@ import logging
 import sys
 from optparse import OptionParser
 
-from platolocorestapi.src.enrichment.domain.sequence import Sequence
-from platolocorestapi.src.enrichment.methods.aafrequency.run import AAFrequency
-from platolocorestapi.src.enrichment.methods.phobius.run import Phobius
+from src.enrichment.domain.sequence import Sequence
+from src.enrichment.methods.aafrequency.run import AAFrequency
+from src.enrichment.methods.phobius.run import Phobius
 
 
 def parse_sequences(input_stream):

@@ -1,4 +1,4 @@
-from platolocorestapi.src.wrapper.methods.method import Method
+from src.wrapper.methods.method import Method
 from subprocess import Popen, PIPE, STDOUT
 import os
 
@@ -20,10 +20,6 @@ class Seg(Method):
         if name == "SEG_intermediate":
             self.method_name = name
             self.params = '-locut 1.9 -hicut 2.5 -window 15'
-        # self.params = parameters
-        # self.params = self.params.replace("locut", "-locut")
-        # self.params = self.params.replace("hicut", "-hicut")
-        # self.params = self.params.replace("window", "-window")
 
     def identify(self, protein_list, proteins):
         input = self.create_fasta_from_sequences(proteins)

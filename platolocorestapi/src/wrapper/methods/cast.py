@@ -1,4 +1,4 @@
-from platolocorestapi.src.wrapper.methods.method import Method
+from src.wrapper.methods.method import Method
 from subprocess import Popen, PIPE
 import os
 

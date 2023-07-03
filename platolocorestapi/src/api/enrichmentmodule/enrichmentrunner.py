@@ -1,5 +1,4 @@
-import platolocorestapi.src.enrichment.methods.phobius.run as phobius
-from io import StringIO
+import src.enrichment.methods.phobius.run as phobius
 
 
 class EnrichmentRunner:

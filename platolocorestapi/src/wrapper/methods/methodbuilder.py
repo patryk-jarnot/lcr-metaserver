@@ -1,8 +1,8 @@
-from platolocorestapi.src.wrapper.methods.cast import Cast
-from platolocorestapi.src.wrapper.methods.seg import Seg
-from platolocorestapi.src.wrapper.methods.flps import Flps
-from platolocorestapi.src.wrapper.methods.simple import Simple
-from platolocorestapi.src.wrapper.methods.gbsc import Gbsc
+from src.wrapper.methods.cast import Cast
+from src.wrapper.methods.seg import Seg
+from src.wrapper.methods.flps import Flps
+from src.wrapper.methods.simple import Simple
+from src.wrapper.methods.gbsc import Gbsc
 
 
 class MethodBuilder:

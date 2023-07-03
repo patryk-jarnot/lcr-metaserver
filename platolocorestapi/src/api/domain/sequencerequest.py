@@ -56,6 +56,7 @@ class Protein:
         self.header = None
         self.sequence = None
 
+
 class SequenceRequest:
     def __init__(self):
         self.fasta = None

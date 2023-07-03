@@ -20,6 +20,7 @@ def calculate_aa_frequency(proteins):
             counts[k] = v / total_count
         prot['data']['enrichment']['aa_frequency'] = counts
 
+
 def read_db_entry(proteins, key, path):
     db_freq_path = path
     with open(db_freq_path, 'r') as f:
@@ -27,6 +28,7 @@ def read_db_entry(proteins, key, path):
     db_freqs = json.loads(content)
     for prot in proteins:
         prot['data']['enrichment'][key] = db_freqs
+
 
 def read_db_frequency(proteins):
     db_freq_path = "{0}/../../data/swiss_frequency".format(os.path.dirname(os.path.realpath(__file__)))
