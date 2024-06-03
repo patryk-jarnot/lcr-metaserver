@@ -14,9 +14,9 @@ class State(Enum):
 
 class Cafs:
     def __init__(self):
-        self.db_path = '../data/cafs'
-        if not os.path.isdir('../data'):
-            os.mkdir('../data')
+        self.db_path = './data/cafs'
+        if not os.path.isdir('./data'):
+            os.mkdir('./data')
         if not os.path.isdir(self.db_path):
             os.mkdir(self.db_path)
 

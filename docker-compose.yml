@@ -2,13 +2,24 @@ services:
   platolocoui:
     build: ./platolocoui
     ports:
-     - 443:443
-     - 8000:8000
+     - 8080:8080
     volumes:
-     - ./platolocoui:/platolocoui
+      #- ./platolocoui:/platolocoui
+     - type: bind
+       source: ./platolocoui
+       target: /platolocoui
+       bind:
+         propagation: shared
+    restart: always
   platolocorestapi:
     build: ./platolocorestapi
     ports:
      - 5002:5002
     volumes:
-     - ./platolocorestapi:/platolocorestapi
+      #- ./platolocorestapi:/platolocorestapi
+     - type: bind
+       source: ./platolocorestapi
+       target: /platolocorestapi
+       bind:
+         propagation: shared
+    restart: always
