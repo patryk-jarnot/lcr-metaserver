@@ -85,7 +85,7 @@
 
                     <tr>
                         <td class="firstcol">URL:</td>
-                        <td class="secoundcol">http://platoloco.aei.polsl.pl/restapi/query</td>
+                        <td class="secoundcol">https://platoloco.aei.polsl.pl/restapi/query</td>
                     </tr>
                     <tr>
                         <td class="firstcol">Example data:</td>
@@ -100,7 +100,7 @@
                     <tr>
                         <td class="firstcol">Example of usage in Python:</td>
                         <td class="secoundcol">import requests<br>
-                            respons = requests.post('http://platoloco.aei.polsl.pl/restapi/query', data=
+                            respons = requests.post('https://platoloco.aei.polsl.pl/restapi/query', data=
                             {"sequences":"","methods":{"seg_default":false,"seg_intermediary":false,"seg_strict":true,"cast":true,"flps":true,"simple":true, "gbsc":true},"enrichment":{"aafrequency":true})<br>
                             json_response = response.json()
                         </td>
@@ -132,12 +132,12 @@
                     </tr>
                     <tr>
                         <td class="firstcol">URL:</td>
-                        <td class="secoundcol">http://platoloco.aei.polsl.pl/restapi/jobs/{token}</td>
+                        <td class="secoundcol">https://platoloco.aei.polsl.pl/restapi/jobs/{token}</td>
                     </tr>
                     <tr>
                         <td class="firstcol">Example URL:</td>
                         <td class="secoundcol">
-                            http://platoloco.aei.polsl.pl/restapi/jobs/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae
+                            https://platoloco.aei.polsl.pl/restapi/jobs/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae
                         </td>
                     </tr>
                     <tr>
@@ -154,7 +154,7 @@
                         <td class="firstcol">Example of usage in Python:</td>
                         <td class="secoundcol"> import requests<br>
                             respons =
-                            requests.get('http://platoloco.aei.polsl.pl/restapi/jobs/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae')<br>
+                            requests.get('https://platoloco.aei.polsl.pl/restapi/jobs/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae')<br>
                             json_response = response.json()<br></td>
                     </tr>
                 </table>
@@ -186,12 +186,12 @@
                     </tr>
                     <tr>
                         <td class="firstcol">URL:</td>
-                        <td class="secoundcol">http://platoloco.aei.polsl.pl/restapi/proteins/{token}</td>
+                        <td class="secoundcol">https://platoloco.aei.polsl.pl/restapi/proteins/{token}</td>
                     </tr>
                     <tr>
                         <td class="firstcol"> Example URL:</td>
                         <td class="secoundcol">
-                            http://platoloco.aei.polsl.pl/restapi/proteins/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae
+                            https://platoloco.aei.polsl.pl/restapi/proteins/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae
                         </td>
                     </tr>
                     <tr>
@@ -202,7 +202,7 @@
                         <td class="firstcol">Example of usage in Python:</td>
                         <td class="secoundcol"> import requests<br>
                             respons =
-                            requests.get('http://platoloco.aei.polsl.pl/restapi/proteins/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae')<br>
+                            requests.get('https://platoloco.aei.polsl.pl/restapi/proteins/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae')<br>
                             json_response = response.json()<br></td>
                     </tr>
                 </table>
@@ -232,12 +232,12 @@
                     </tr>
                     <tr>
                         <td class="firstcol">URL</td>
-                        <td class="secoundcol">http://platoloco.aei.polsl.pl/restapi/proteins/{token}/{id}</td>
+                        <td class="secoundcol">https://platoloco.aei.polsl.pl/restapi/proteins/{token}/{id}</td>
                     </tr>
                     <tr>
                         <td class="firstcol">URL</td>
                         <td class="secoundcol">
-                            http://platoloco.aei.polsl.pl/restapi/proteins/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae/1
+                            https://platoloco.aei.polsl.pl/restapi/proteins/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae/1
                         </td>
                     </tr>
                     <tr>
@@ -248,7 +248,7 @@
                         <td class="firstcol">Example of usage in Python:</td>
                         <td class="secoundcol"> import requests<br>
                             respons =
-                            requests.get('http://platoloco.aei.polsl.pl/restapi/proteins/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae/1')<br>
+                            requests.get('https://platoloco.aei.polsl.pl/restapi/proteins/de12cb5841ccfcceaf1f5bf8ebb08eab1b3b0eae/1')<br>
                             json_response = response.json()<br></td>
                     </tr>
                 </table>
@@ -265,8 +265,9 @@ import time
 
 
 def send_query(url):
-    url = "http://{0}/restapi/query".format(url)
-    data = '{"name":"","sequences":">sp|Q6GZX3|002L_FRG3G Uncharacterized protein 002L OS=Frog virus 3 (isolate Goorha) GN=FV3-002L PE=4 SV=1\\nSIIGATRLQNDKSDTYSAGPCYAGGCSAFTPRGTCGKDWDLGEQTCASGFCTSQPLCARKKTQVCGLRYSSKGKDPLVSAEWDSRGAPYVRCTYDADLIDTQAQVDQFVSMFGESPSLERYCMRGVKNTAGELVSRVSSDADPAGGWCRKWYSAHRGPDQDAALGSFCIKNPGAADCCINRASDPVYQKVKTLHAYPDQCWYVPCAADVGELKMGTQRDTPTNCPTQVCQIVFNMLDGSVTMDDVKNTINCDFSKYVPPPPPPKPTPPTPPTPPTPPTPPTPPTPPTPRPVHNRKMFFVAGAVLVAILISTVRW\\n>sp|P14922|CYC8_YEAST General transcriptional corepressor CYC8 OS=Saccharomyces cerevisiae (strain ATCC 204508 / S288c) GN=CYC8 PE=1 SV=2\\nNPGGEQTIMEQPAQQQQQQQQQQQQQQQQAAVPQQPLDPLTQSTAETWLSIASLAETLGGDRAAMAYDATLQFNPSSAKALTSLAHLYRSRDMFQRAAELYERALLVNPELSDVWATLHCYLMLDDLQRAYNAYQQALYHLSNPNVPKLWHGIGILYDRYGSLDYAEEAFAKVLELDHFEKANEIYFRLGIIYKHQGKWSQALECFRYILPQPPAPLQEWDIWFQLGSVLESMGEWGAKEAYEHVLAQNQHHAKVLQQLGCLYGMSNVQFYDPQKALDYLLKSLEADPSDATTWYLGRVHMIRTDYTAAYDAFQQAVNRDSRNPIFWCSIGVLYYQISQYRDALDAYTRAIRLNYISEVWYDLGTLYETCNNQLSDALDAYKQAARLDVNNVHIRERLEALTKQLENPGNINKNGAPTNASPAPPPVILQPTLQPNDQGNPLNTRISAQSANATASMVQQQHPAQQTPINSSTMYSNGASPQLQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAHAQAQAQAQAQAQAQAQAQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQLQPLPRQQLQQKGSVQMLNPQQGQPYITQPTVIQAHQLQPFSTQAMEHPQSSQLPPQQQQLQSVQHPQQLQGPQAQAPQPLIQHNVEQNVLPQKRYMEGAIHTLVDAAVSSSTHTENNTKSPRQPTHAIPTAPATGITNAEPQVKKQKLNSPNSNINKLVNTATSIEENAKSEVSNQSPAVVESNTNNTSEEKPVKANSIPSVIGAQEPPQEASPAEEATKAASVSPSTKPLNTEPESSSVQPTVSSESTTKANDQSTAETIELSTATVPAEASPVEDEVRQHSKEENGTTEASAPSTEEAEPAASRDEKQQDETAATTITVIKPTLETMETVKEEAKMREEEQTSQEKSPQENTLPRENVVRQVEEENYDD\\n>sp|Q1ZXH2|FHKB_DICDI Probable serine/threonine-protein kinase fhkB OS=Dictyostelium discoideum GN=fhkB PE=3 SV=1\\nSQDIQTQNSYSDELYSSQIYSTQQPQQPQQQPQQQQSTFSSQQSQSSSYDFIYSTPQIHQNSQNSQFSQNPLYDDFIHSTQNSYSQRVSSQRSYSQKSSSSQISFSQIPSSQIQSSQISSQIHSSQIPSSQNQSSQKSQFSFSQIPSSQIPSSQKRFFQSQNDDFVPSSQVTSLQDILPQPIQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQCQPQQQQTQQQQQQQQQQQQQQQQQQQQQQQQQTQQQQQQPQEDDDDYDDYDGYDNYEDFVYNEGEEGEEDYEDYEQENDDDDEDEDDDDDDDDDDDDEEEEEESQQQHIRSRALQSRSSQSRPLLRSGFKSPISRLSQTTSPEYIYISSQSNTHTNQLGQSSQQTNSPNVHFNSLQQKKKQQQQQQQQQQQQQQQQQQQQQQQQQQSQQIIGSQSSQSSQLPPTQPPVEVPVNLGRLIPINASHIPINLNLKREDRIVGRSSSCDARLIDNYLTISGKHCEIYRADNLTCLKHIPLCKDKTDCHKNFGMLIVHDISNGSYINGELIGNGKTRILRSDDILSLGHPSGDLKFIFESEFQFNFILDIKDNVNNLNENDYKKLRTAYDNARIENKNCALRDYYFVKEIGSGGYGIVYEGLYKLNGKRVAIKHIDLLKGSTSKSMELVSKEYNALKNIKHRNVIEFFDIVFSSTDCFFIVELATNDLSNLLRKRCVDDDIKRICKQLLLGFNYLHNLGIVHRDLKPENILYNEFKQGFSIKITDFGLSSFVEESQYQTFCGTPLFFAPEVIANNFFSNGYGKSCDLWSIGVTLYLSLCKYKPFIVDCRDLYHSFIGNLGFTSKKWAKISNYAKDLVRRLLVIDPEHRITIKEALNHPWFTQDRRFFKKYPKHYKRAQPKTQFFVECFNVYYDLKSETGFICFREHFDNLETNYALFKQNFDNNNNNNNNNNNNNNNNNNNNNNNNINNNNNNINNNNINNNNNNNNNNNNNTNTNNINNNNNNYNNSHNHNNNHNHNHNLNNHNHNNNHHHNHNHNHNHNHNHNHNHNHNHNHNHNHNNHNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNYYNNNINNINNNINNNINNNNNYHQQYTQHTM","methods":{"seg_default":true,"seg_intermediate":true,"seg_strict":true,"cast":true,"flps":true,"flps_strict":true,"simple":true,"gbsc":true},"enrichment":{"pfam":true,"phobius":true,"aafrequency":true},"params":{"seg":{"window":12,"k1":2.2,"k2":2.5},"cast":{"threshold":40,"matrix":1},"flps":{"min_tract_len":15,"max_tract_len":500,"pval":0.001,"regions":{"single":true,"multiple":true,"whole":false}},"simple":{"score_mono":1,"score_di":1,"score_tri":1,"score_tetra":1,"score_penta":1,"score_hexa":1,"score_hepta":1,"score_octa":1,"score_nona":1,"score_deca":1,"window":11,"num_of_rand":100,"rand_method":3,"stringency":0.9},"gbsc":{"score":3,"distance":7}}}'
+    url = "https://{0}/restapi/query".format(url)
+    data = '{"name":"", "sequences":">sp|Q6GZX3|002L_FRG3G Uncharacterized protein 002L OS=Frog virus 3 (isolate Goorha) GN=FV3-002L PE=4 SV=1\\nSIIGATRLQNDKSDTYSAGPCYAGGCSAFTPRGTCGKDWDLGEQTCASGFCTSQPLCARKKTQVCGLRYSSKGKDPLVSAEWDSRGAPYVRCTYDADLIDTQAQVDQFVSMFGESPSLERYCMRGVKNTAGELVSRVSSDADPAGGWCRKWYSAHRGPDQDAALGSFCIKNPGAADCCINRASDPVYQKVKTLHAYPDQCWYVPCAADVGELKMGTQRDTPTNCPTQVCQIVFNMLDGSVTMDDVKNTINCDFSKYVPPPPPPKPTPPTPPTPPTPPTPPTPPTPPTPRPVHNRKMFFVAGAVLVAILISTVRW\\n>sp|P14922|CYC8_YEAST General transcriptional corepressor CYC8 OS=Saccharomyces cerevisiae (strain ATCC 204508 / S288c) GN=CYC8 PE=1 SV=2\\nNPGGEQTIMEQPAQQQQQQQQQQQQQQQQAAVPQQPLDPLTQSTAETWLSIASLAETLGGDRAAMAYDATLQFNPSSAKALTSLAHLYRSRDMFQRAAELYERALLVNPELSDVWATLHCYLMLDDLQRAYNAYQQALYHLSNPNVPKLWHGIGILYDRYGSLDYAEEAFAKVLELDHFEKANEIYFRLGIIYKHQGKWSQALECFRYILPQPPAPLQEWDIWFQLGSVLESMGEWGAKEAYEHVLAQNQHHAKVLQQLGCLYGMSNVQFYDPQKALDYLLKSLEADPSDATTWYLGRVHMIRTDYTAAYDAFQQAVNRDSRNPIFWCSIGVLYYQISQYRDALDAYTRAIRLNYISEVWYDLGTLYETCNNQLSDALDAYKQAARLDVNNVHIRERLEALTKQLENPGNINKNGAPTNASPAPPPVILQPTLQPNDQGNPLNTRISAQSANATASMVQQQHPAQQTPINSSTMYSNGASPQLQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAQAHAQAQAQAQAQAQAQAQAQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQLQPLPRQQLQQKGSVQMLNPQQGQPYITQPTVIQAHQLQPFSTQAMEHPQSSQLPPQQQQLQSVQHPQQLQGPQAQAPQPLIQHNVEQNVLPQKRYMEGAIHTLVDAAVSSSTHTENNTKSPRQPTHAIPTAPATGITNAEPQVKKQKLNSPNSNINKLVNTATSIEENAKSEVSNQSPAVVESNTNNTSEEKPVKANSIPSVIGAQEPPQEASPAEEATKAASVSPSTKPLNTEPESSSVQPTVSSESTTKANDQSTAETIELSTATVPAEASPVEDEVRQHSKEENGTTEASAPSTEEAEPAASRDEKQQDETAATTITVIKPTLETMETVKEEAKMREEEQTSQEKSPQENTLPRENVVRQVEEENYDD\\n>sp|Q1ZXH2|FHKB_DICDI Probable serine/threonine-protein kinase fhkB OS=Dictyostelium discoideum GN=fhkB PE=3 SV=1\\nSQDIQTQNSYSDELYSSQIYSTQQPQQPQQQPQQQQSTFSSQQSQSSSYDFIYSTPQIHQNSQNSQFSQNPLYDDFIHSTQNSYSQRVSSQRSYSQKSSSSQISFSQIPSSQIQSSQISSQIHSSQIPSSQNQSSQKSQFSFSQIPSSQIPSSQKRFFQSQNDDFVPSSQVTSLQDILPQPIQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQCQPQQQQTQQQQQQQQQQQQQQQQQQQQQQQQQTQQQQQQPQEDDDDYDDYDGYDNYEDFVYNEGEEGEEDYEDYEQENDDDDEDEDDDDDDDDDDDDEEEEEESQQQHIRSRALQSRSSQSRPLLRSGFKSPISRLSQTTSPEYIYISSQSNTHTNQLGQSSQQTNSPNVHFNSLQQKKKQQQQQQQQQQQQQQQQQQQQQQQQQQSQQIIGSQSSQSSQLPPTQPPVEVPVNLGRLIPINASHIPINLNLKREDRIVGRSSSCDARLIDNYLTISGKHCEIYRADNLTCLKHIPLCKDKTDCHKNFGMLIVHDISNGSYINGELIGNGKTRILRSDDILSLGHPSGDLKFIFESEFQFNFILDIKDNVNNLNENDYKKLRTAYDNARIENKNCALRDYYFVKEIGSGGYGIVYEGLYKLNGKRVAIKHIDLLKGSTSKSMELVSKEYNALKNIKHRNVIEFFDIVFSSTDCFFIVELATNDLSNLLRKRCVDDDIKRICKQLLLGFNYLHNLGIVHRDLKPENILYNEFKQGFSIKITDFGLSSFVEESQYQTFCGTPLFFAPEVIANNFFSNGYGKSCDLWSIGVTLYLSLCKYKPFIVDCRDLYHSFIGNLGFTSKKWAKISNYAKDLVRRLLVIDPEHRITIKEALNHPWFTQDRRFFKKYPKHYKRAQPKTQFFVECFNVYYDLKSETGFICFREHFDNLETNYALFKQNFDNNNNNNNNNNNNNNNNNNNNNNNNINNNNNNINNNNINNNNNNNNNNNNNTNTNNINNNNNNYNNSHNHNNNHNHNHNLNNHNHNNNHHHNHNHNHNHNHNHNHNHNHNHNHNHNHNNHNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNYYNNNINNINNNINNNINNNNNYHQQYTQHTM","methods":{"seg_default":true,"seg_intermediate":true,"seg_strict":true,"cast":true,"flps":true,"flps_strict":true,"simple":true,"gbsc":true},"enrichment":{"pfam":true,"phobius":true,"aafrequency":true},"params":{"seg":{"window":12,"k1":2.2,"k2":2.5},"cast":{"threshold":40,"matrix":1},"flps":{"min_tract_len":15,"max_tract_len":500,"pval":0.001,"regions":{"single":true,"multiple":true,"whole":false}},"simple":{"score_mono":1,"score_di":1,"score_tri":1,"score_tetra":1,"score_penta":1,"score_hexa":1,"score_hepta":1,"score_octa":1,"score_nona":1,"score_deca":1,"window":11,"num_of_rand":100,"rand_method":3,"stringency":0.9},"gbsc":{"score":3,"distance":7}}}'
+
 
     response = requests.put(url, data=data)
 
@@ -274,7 +275,7 @@ def send_query(url):
 
 
 def ask_job_state(url, token):
-    url = "http://{0}/restapi/job/{1}".format(url, token)
+    url = "https://{0}/restapi/job/{1}".format(url, token)
 
     response = requests.get(url)
     return json.loads(response.text)['status']
@@ -282,14 +283,14 @@ def ask_job_state(url, token):
 
 
 def get_list_of_proteins(url, token):
-    url = "http://{0}/restapi/proteins/{1}".format(url, token)
+    url = "https://{0}/restapi/proteins/{1}".format(url, token)
 
     response = requests.get(url)
     return json.loads(response.text)
 
 
 def get_protein_details(url, token, id):
-    url = "http://{0}/restapi/proteins/{1}/{2}".format(url, token, id)
+    url = "https://{0}/restapi/proteins/{1}/{2}".format(url, token, id)
 
     response = requests.get(url)
     return json.loads(response.text)
